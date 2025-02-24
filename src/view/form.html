@@ -85,16 +85,24 @@
                                     else if (parent.layer) {
                                         parent.layer.msg(data.msg || data.message || "{:__blang('bilder_save_failed')}");
                                     }
+                                    else if (lightyear) {
+                                        lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_failed')}", 'danger');
+                                    }
                                     else {
                                         layer.msg(data.msg || data.message || "{:__blang('bilder_save_failed')}");
                                     }
-                                    
+
                                     setTimeout(function () {
                                         location.replace(data.url);
                                     }, data.wait * 1000 || 2000);
                                 }
                                 else {
-                                    layer.msg(data.msg || data.message || "{:__blang('bilder_save_failed')}", 'danger');
+                                    if (lightyear) {
+                                        lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_failed')}", 'danger');
+                                    }
+                                    else {
+                                        layer.msg(data.msg || data.message || "{:__blang('bilder_save_failed')}");
+                                    }
                                 }
                             }
                             if (data.script || (data.data && data.data.script)) {

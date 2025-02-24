@@ -155,20 +155,18 @@ class Form extends FWrapper implements Renderable
      */
     public function readonly($val = true)
     {
-        if ($val) {
-            foreach ($this->rows as $row) {
+        foreach ($this->rows as $row) {
 
-                if ($row instanceof Tab || $row instanceof Step) {
-                    $row->readonly($val);
-                    continue;
-                }
-
-                if (!($row instanceof FRow)) {
-                    continue;
-                }
-
-                $row->getDisplayer()->readonly($val);
+            if ($row instanceof Tab || $row instanceof Step) {
+                $row->readonly($val);
+                continue;
             }
+
+            if (!($row instanceof FRow)) {
+                continue;
+            }
+
+            $row->getDisplayer()->readonly($val);
         }
 
         $this->readonly = $val;
