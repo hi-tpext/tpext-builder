@@ -283,7 +283,10 @@ class Tab extends Widget implements Renderable
         $template = Module::getInstance()->getViewsPath() . $this->view . '.html';
 
         $this->labels[$this->active]['active'] = 'active';
-        isset($this->rows[$this->active]) ? $this->rows[$this->active]['active'] = 'in active' : false;
+
+        if (!isset($this->rows[$this->active])) {
+            $this->active = array_keys($this->rows)[0];
+        }
 
         $vars = [
             'labels' => $this->labels,
