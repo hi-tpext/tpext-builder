@@ -284,8 +284,8 @@ class Tab extends Widget implements Renderable
 
         $this->labels[$this->active]['active'] = 'active';
 
-        if (!isset($this->rows[$this->active])) {
-            $this->active = array_keys($this->rows)[0];
+        if (isset($this->rows[$this->active])) {
+            $this->rows[$this->active]['active'] = 'in active';
         }
 
         $vars = [
