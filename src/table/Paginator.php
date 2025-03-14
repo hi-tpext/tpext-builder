@@ -121,7 +121,7 @@ class Paginator extends Bootstrap
             return '';
         }
 
-        $html = parent::render();
+        $html = (string) parent::render();
 
         if ($this->paginatorClass) {
             $html = preg_replace('/(.+)(pagination)(.+)/i', '$1$2 ' . $this->paginatorClass . '$3', $html);
