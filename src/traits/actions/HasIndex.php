@@ -77,6 +77,12 @@ trait HasIndex
      */
     protected $delNotAllowed = [];
 
+    /**
+     * 是否延迟加载表格数据
+     * @var boolean
+     */
+    protected $tableDelay = false;
+
     public function index()
     {
         if (request()->isAjax()) {
@@ -87,17 +93,32 @@ trait HasIndex
 
         $this->createTable($builder);
 
-        $this->initTable();
-        if (request()->isAjax()) {
-            return $this->table->partial()->render();
-        }
-
         if ($this->useSearch) {
             $this->search = $this->table->getSearch();
             $this->buildSearch();
         }
 
+        if ($this->isFetchIndexData()) {
+            $this->initTable();
+            return $this->table->partial()->render();
+        }
+        if ($this->tableDelay || ($this->useSearch && $this->search->hasDefault())) { //设定了延迟加载或搜索条件有非空值时，首次请求不加载数据，只返回html
+            $data = [];
+            $this->buildTable($data, false);
+        } else {
+            $this->initTable();
+        }
         return $builder->render();
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return boolean
+     */
+    protected function isFetchIndexData()
+    {
+        return input('__fetch_data__') == 'y' || request()->isAjax();
     }
 
     /**

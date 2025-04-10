@@ -34,7 +34,7 @@ class Search extends SWrapper implements Renderable
     /**
      * Undocumented variable
      *
-     * @var FRow[] 
+     * @var SRow[] 
      */
     protected $rows = [];
 
@@ -118,11 +118,30 @@ class Search extends SWrapper implements Renderable
     /**
      * Undocumented function
      *
-     * @return array
+     * @return array|SRow[]
      */
     public function getRows()
     {
         return $this->rows;
+    }
+
+    /**
+     * 表单是否填充了默认值
+     * @return bool
+     */
+    public function hasDefault(): bool
+    {
+        foreach ($this->rows as $row) {
+            if ($row instanceof SRow) {
+                $default = $row->getDisplayer()->getDefault();
+
+                if (!($default === '' || $default === null || $default === [])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -401,6 +420,7 @@ class Search extends SWrapper implements Renderable
         $this->hidden('__table__')->value($this->tableId);
         $this->hidden('__sort__');
         $this->hidden('__columns__')->value(implode(',', $this->chooseColumns));
+        $this->hidden('__fetch_data__')->value('y');
 
         $this->addClass('search-form');
         $this->button('refresh', 'refresh', '1')->addClass('search-refresh')->getWrapper()->addClass('hidden');
@@ -441,20 +461,17 @@ class Search extends SWrapper implements Renderable
 
         $(document).bind('keyup', function(event) {
             if (event.keyCode === 13) {
-                if($('#{$form} form').hasClass('form-empty'))
-                {
+                if($('#{$form} form').hasClass('form-empty')) {
                     return false;
                 }
-                if($('form').size() > 1)
-                {
+                if($('form').size() > 1) {
                     return false;
                 }
                 window.__forms__['{$form}'].formSubmit();
                 return false;
             }
             if (event.keyCode === 0x1B) {
-                if($('#{$form} form').hasClass('form-empty'))
-                {
+                if($('#{$form} form').hasClass('form-empty')) {
                     return true;
                 }
                 var index = layer.msg(__blang.bilder_reset_filter_criteria, {
@@ -507,12 +524,10 @@ class Search extends SWrapper implements Renderable
         $('body').on('click', '#{$this->tableId} #dropdown-pagesize-div .dropdown-menu li a', function(){
             var pagesize = $(this).data('key');
             var oldsize = $('#{$form} form input[name="__pagesize__"]').val();
-            if(pagesize == oldsize)
-            {
+            if(pagesize == oldsize) {
                 return;
             }
-            if(pagesize > oldsize)
-            {
+            if(pagesize > oldsize) {
                 $('#{$form} form input[name="__page__"]').val(1);
             }
             $('#{$form} form input[name="__pagesize__"]').val(pagesize);
@@ -524,22 +539,17 @@ class Search extends SWrapper implements Renderable
             window.__forms__['{$form}'].formSubmit();
         });
 
-        if(!$('#{$form} form').hasClass('form-empty'))
-        {
+        if(!$('#{$form} form').hasClass('form-empty')) {
             $('#btn-search{$extKey}').removeClass('hidden');
         }
-        else
-        {
+        else {
             $('#{$form}').addClass('hidden');
         }
 
         $('body').on('click', '#btn-search{$extKey}', function(){
-            if($('#{$form} form').hasClass('hidden'))
-            {
+            if($('#{$form} form').hasClass('hidden')) {
                 $('#{$form} form').removeClass('hidden');
-            }
-            else
-            {
+            } else {
                 $('#{$form} form').slideToggle(300);
             }
         });
@@ -595,13 +605,10 @@ class Search extends SWrapper implements Renderable
 
         $('body').on('click', '.table .sortable', function(){
             var sort = '';
-            if($(this).hasClass('mdi-sort-descending'))
-            {
+            if($(this).hasClass('mdi-sort-descending')) {
                 sort = $(this).data('key') + ' asc';
                 $(this).removeClass('mdi-sort-descending').addClass('mdi-sort-ascending');
-            }
-            else
-            {
+            } else {
                 sort = $(this).data('key') + ' desc';
                 $('.sortable.mdi-sort-ascending').removeClass('mdi-sort-ascending').addClass('mdi-sort');
                 $('.sortable.mdi-sort-descending').removeClass('mdi-sort-descending').addClass('mdi-sort');
@@ -745,7 +752,9 @@ EOT;
         }
         $this->tablink = null;
         foreach ($this->rows as $row) {
-            $row->destroy();
+            if ($row instanceof SRow) {
+                $row->destroy();
+            }
         }
         $this->rows = null;
     }

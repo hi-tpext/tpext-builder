@@ -1014,7 +1014,9 @@ EOT;
     {
         $this->allContentsEnd();
         foreach ($this->rows as $row) {
-            $row->destroy();
+            if ($row instanceof FRow) {
+                $row->destroy();
+            }
         }
         $this->tab = null;
         $this->step = null;
