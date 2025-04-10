@@ -5,8 +5,8 @@
 {:$addTop->render()}
 {/notempty}
 <div id="{$id}" class="form-wrapper">
-    <form action="{$action}" method="{$method|default='POST'}" enctype="application/x-www-form-urlencoded" class="{$class}"
-        {$attr|raw}>
+    <form action="{$action}" method="{$method|default='POST'}" enctype="application/x-www-form-urlencoded"
+        class="{$class}" {$attr|raw}>
         {volist name="rows" id="row"}
         <div class="form-group col-md-{$row->getColSizeClass()} {$row->getClass()} row-{$row->getName()}-div
             {$row->getErrorClass()}" {$row->getAttrWithStyle()|raw}>
@@ -44,9 +44,7 @@
                         type: "{$method|default='POST'}",
                         dataType: 'html',
                         success: function (data) {
-                            setTimeout(function () {
-                                lightyear.loading('hide');
-                            }, 500);
+                            lightyear.loading('hide');
                             $('#' + that.searchFor).replaceWith(data);
                             $('#' + that.searchFor + ' .table-wrapper').scrollLeft(scrollLeft);
                         },
@@ -85,8 +83,7 @@
                 __ids__.value = values.join(',');
                 form.append(__ids__);
 
-                if(ajax)
-                {
+                if (ajax) {
                     var loading = layer.open({
                         type: 1,
                         title: "{:__blang('bilder_operation_tips')}",
@@ -104,47 +101,41 @@
                         dataType: 'json',
                         success: function (data) {
                             layer.close(loading);
-                            if(data.code)
-                            {
-                                if(data.open_url)//数据太多，打开页面，分页处理
-                                {
+                            if (data.code) {
+                                if (data.open_url) {
+                                    //数据太多，打开页面，分页处理
                                     layer.open({
                                         type: 2,
                                         title: "{:__blang('bilder_generating_data')}",
                                         scrollbar: false,
-                                        area: ['400px','150px'],
+                                        area: ['400px', '150px'],
                                         content: url + '?' + postdata
                                     });
-                                }
-                                else//一次性生成文件，并返回下载链接
-                                {
+                                } else {
+                                    //一次性生成文件，并返回下载链接
                                     var filename = data.data.replace(/.+?([^\/]+)$/, '$1');
                                     layer.open({
                                         type: 1,
                                         title: "{:__blang('bilder_download_file')}",
                                         shadeClose: false,
-                                        area: ['400px','150px'],
+                                        area: ['400px', '150px'],
                                         content: '<div class="alert alert-success " role="alert" style="widht:94%;margin:2%;"><p>' + "{:__blang('bilder_file_has_been_generated')}" + '</p><a onclick="layer.closeAll();" target="_blank" href="' + data.data + '">' + filename + '</a></div>',
                                     });
                                 }
                             }
-                            else
-                            {
+                            else {
                                 layer.alert("{:__blang('bilder_operation_failed')}-" + data.msg);
                             }
                         },
-                        error:function(){
+                        error: function () {
                             layer.close(loading);
                             lightyear.notify("{:__blang('bilder_network_error')}", 'danger');
                         }
                     });
-                }
-                else
-                {
+                } else {
                     lightyear.loading('show');
                     form.attr('action', url);
                     form.trigger('submit');
-                    form.attr('action', this.action);
                     setTimeout(function () {
                         lightyear.loading('hide');
                     }, 2000);

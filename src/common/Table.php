@@ -107,6 +107,8 @@ class Table extends TWrapper implements Renderable
 
     protected $partial = false;
 
+    protected $delay = true;//延迟读取数据，调用fill()填充数据后取消延迟
+
     /**
      * Undocumented variable
      *
@@ -362,6 +364,7 @@ class Table extends TWrapper implements Renderable
      */
     public function data($data = [])
     {
+        $this->delay = false;
         $this->data = $data;
 
         return $this;
@@ -408,6 +411,7 @@ class Table extends TWrapper implements Renderable
      */
     public function fill($data = [])
     {
+        $this->delay = false;
         if (empty($data)) {
             return $this;
         }
@@ -710,6 +714,9 @@ class Table extends TWrapper implements Renderable
     protected function tableScript()
     {
         $table = $this->getTableId();
+        $form = $this->getSearch()->getFormId();
+
+        $delay = $this->delay ? 'true' : 'false';
 
         $script = <<<EOT
 
@@ -774,6 +781,10 @@ class Table extends TWrapper implements Renderable
             });
             checkall.prop('checked', ss == count);
         });
+
+        if({$delay}) {
+            window.__forms__['{$form}'].formSubmit();
+        }
 
 EOT;
         Builder::getInstance()->addScript($script);
@@ -1048,12 +1059,31 @@ EOT;
 
         if ($this->usePagesizeDropdown && $this->pageSize && empty($this->pagesizeDropdown)) {
             $items = [
-                0 => __blang('bilder_pagesize_default'), 6 => '6', 10 => '10', 14 => '14', 20 => '20', 30 => '30', 40 => '40', 50 => '50', 60 => '60', 90 => '90', 120 => '120', 200 => '200', 350 => '350',
+                0 => __blang('bilder_pagesize_default'),
+                6 => '6',
+                10 => '10',
+                14 => '14',
+                20 => '20',
+                30 => '30',
+                40 => '40',
+                50 => '50',
+                60 => '60',
+                90 => '90',
+                120 => '120',
+                200 => '200',
+                350 => '350',
             ];
 
             ksort($items);
 
             $this->pagesizeDropdown($items);
+        }
+
+        $fetchData = input('__fetch_data__') == 'y';
+
+        $emptyText = $this->emptyText;
+        if (!$fetchData) {
+            $emptyText = '<div class="text-center">' . __blang('bilder_loading') . '</div>';
         }
 
         $vars = [
@@ -1063,7 +1093,7 @@ EOT;
             'cols' => $this->cols,
             'list' => $this->list,
             'data' => $this->data,
-            'emptyText' => $this->emptyText,
+            'emptyText' => $emptyText,
             'headTextAlign' => $this->headTextAlign,
             'ids' => $this->ids,
             'sortable' => $this->sortable,
@@ -1125,13 +1155,13 @@ EOT;
                 $this->__fields__->addCol($col);
             } else {
                 $displayer = $col->$name($arguments[0], $count > 1 ? $arguments[1] : '');
-                
+
                 $this->cols[$arguments[0]] = $col;
                 $this->headers[$arguments[0]] = $displayer->getLabel();
             }
-            
+
             $displayer = $col->$name($arguments[0], $count > 1 ? $arguments[1] : '');
-            
+
             $col->setLabel($displayer->getLabel());
 
             if ($displayer instanceof MultipleFile) { //表格中默认禁止直接上传图片
