@@ -107,7 +107,7 @@ class Table extends TWrapper implements Renderable
 
     protected $partial = false;
 
-    protected $delay = true;//延迟读取数据，调用fill()填充数据后取消延迟
+    protected $delay = true; //延迟读取数据，调用fill()填充数据后取消延迟
 
     /**
      * Undocumented variable
@@ -1082,7 +1082,7 @@ EOT;
         $fetchData = input('__fetch_data__') == 'y';
 
         $emptyText = $this->emptyText;
-        if (!$fetchData) {
+        if (!$fetchData && $this->delay) {
             $emptyText = '<div class="text-center">' . __blang('bilder_loading') . '</div>';
         }
 
