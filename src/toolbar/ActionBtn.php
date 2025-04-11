@@ -128,6 +128,9 @@ class ActionBtn extends Bar
      */
     public function parseMapClass($data)
     {
+        if (empty($data)) {
+            return $this;
+        }
         $matchClass = [];
 
         $values = $class = $field = $logic = $val = $match = null;
