@@ -95,6 +95,9 @@ class Actions extends DropdownBtns
      */
     public function parseMapClass($data)
     {
+        if (empty($data)) {
+            return $this;
+        }
         $values = $class = $field = $logic = $val = $match = null;
         $matchClass = [];
 
