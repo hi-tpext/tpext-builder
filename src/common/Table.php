@@ -1042,7 +1042,7 @@ EOT;
             $this->usePagesizeDropdown = false;
         }
 
-        $sort = input('get.__sort__', $this->sortOrder);
+        $sort = $this->sortOrder ?: input('get.__sort__');
         $sortKey = '';
         $sortOrder = '';
 

@@ -244,7 +244,7 @@ trait HasIndex
      */
     protected function getSortOrder()
     {
-        $sortOrder = input('get.__sort__', $this->sortOrder ? $this->sortOrder : $this->getPk() . ' desc');
+        $sortOrder = input('get.__sort__') ?: ($this->sortOrder ?: $this->getPk() . ' desc');
 
         //可重写此方法，比如用户点击除了create_time以外的任何个字段排序，都再加一个`create_time`倒序。
 
