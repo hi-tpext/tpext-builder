@@ -45,6 +45,8 @@ class Tree extends Field
      */
     protected $expandNodeOnclick = false;
 
+    protected $noCascaded = true;
+
     protected $jsOptions =  [
         'view' => [
             'dblClickExpand' => false,
@@ -112,6 +114,17 @@ class Tree extends Field
     public function multiple($val = true)
     {
         $this->multiple = $val;
+        return $this;
+    }
+
+    /**
+     * 多选时，是否父子节点不级联
+     * @param bool $val
+     * @return $this
+     */
+    public function noCascaded($val = true)
+    {
+        $this->noCascaded = $val;
         return $this;
     }
 
@@ -303,6 +316,7 @@ class Tree extends Field
 
         $zNodes = json_encode($this->options);
         $multiple = $this->multiple ? 1 : 0;
+        $noCascaded = $this->noCascaded ? 1 : 0;
         $enableCheck = $this->enableCheck ? 1 : 0;
 
         $expandNodeOnclick = $this->expandNodeOnclick ? 'true' : 'false';
@@ -312,12 +326,12 @@ class Tree extends Field
         var treeObj{$key} = null;
 
         var setting{$key} = {
-            {$configs},
             check: {
               enable: '{$enableCheck}' == '1',
               autoCheckTrigger: true,
               chkStyle: '{$multiple}' == '1' ? 'checkbox' : 'radio',
               radioType: 'all',
+              chkboxType: '{$noCascaded}' == '1' ? {"Y":"", "N":""} : {"Y":"s", "N":"s"},
             },
             data: {
               simpleData: {
@@ -351,7 +365,7 @@ class Tree extends Field
             }
         };
 
-        treeObj{$key} = $.fn.zTree.init($("#{$selectId}-tree"), setting{$key}, {$zNodes});
+        treeObj{$key} = $.fn.zTree.init($("#{$selectId}-tree"), $.extend(true, setting{$key}, {$configs}, {$zNodes});
 
 EOT;
         $this->script[] = $script;

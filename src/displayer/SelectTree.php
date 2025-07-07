@@ -21,6 +21,8 @@ class SelectTree extends Tree
 
     protected $attr = 'size="1"';
 
+    protected $noCascaded = true;
+
     protected $jsOptions =  [
         'data' => [
             'simpleData' => [
@@ -28,6 +30,18 @@ class SelectTree extends Tree
             ]
         ],
     ];
+
+    /**
+     * 多选时，是否父子节点不级联
+     * @param mixed $val
+     * @param bool $val
+     * @return $this
+     */
+    public function noCascaded($val = true)
+    {
+        $this->noCascaded = $val;
+        return $this;
+    }
 
     /**
      * Undocumented function
@@ -65,6 +79,9 @@ class SelectTree extends Tree
         $zNodes = json_encode($this->options);
         $checked = json_encode($this->checked);
 
+        $multiple = $this->multiple ? 1 : 0;
+        $noCascaded = $this->noCascaded ? 1 : 0;
+
         $script = <<<EOT
 
         var setting{$key} = {$configs};
@@ -74,7 +91,12 @@ class SelectTree extends Tree
 			titleField : 'name',
 			ztree : {
 				setting : $.extend(true, {
-					treeId : '{$selectId}'
+					treeId : '{$selectId}',
+                    check: {
+                        chkStyle: '{$multiple}' == '1' ? 'checkbox' : 'radio',
+                        radioType: 'all',
+                        chkboxType: '{$noCascaded}' == '1' ? {"Y":"", "N":""} : {"Y":"s", "N":"s"},
+                    },
 				}, setting{$key}),
 				zNodes : {$zNodes}
 			}
