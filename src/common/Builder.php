@@ -2,6 +2,7 @@
 
 namespace tpext\builder\common;
 
+use Webman\Context;
 use tpext\think\App;
 use tpext\think\View;
 use think\facade\Session;
@@ -77,6 +78,8 @@ class Builder implements Renderable
 
     protected static $instance = null;
 
+    protected static $isWebmanContext = null;
+
     protected function __construct($title, $desc)
     {
         $this->title = $title;
@@ -92,9 +95,16 @@ class Builder implements Renderable
      */
     public static function getInstance($title = '', $desc = '')
     {
+        if (is_null(self::$isWebmanContext)) {
+            self::$isWebmanContext = class_exists(Context::class);
+        }
+        if (self::$isWebmanContext) {
+            self::$instance = Context::get(static::class);
+        }
         if (self::$instance == null) {
             self::$instance = new static($title, $desc);
             self::$instance->created();
+            Context::set(static::class, self::$instance);
 
             ExtLoader::trigger('tpext_create_builder', self::$instance);
         } else {
@@ -116,9 +126,17 @@ class Builder implements Renderable
      */
     public static function destroyInstance()
     {
+        if (self::$isWebmanContext) {
+            self::$instance = Context::get(static::class);
+        }
+
         if (self::$instance) {
             self::$instance->destroy();
             self::$instance = null;
+            
+            if (self::$isWebmanContext) {
+                Context::set(static::class, null);
+            }
         }
     }
 
@@ -763,7 +781,7 @@ class Builder implements Renderable
             $this->script[] = "lightyear.notify('{$this->notify[0]}', '{$this->notify[1]}', {$this->notify[2]}, '{$this->notify[3]}', '{$this->notify[4]}', '{$this->notify[5]}');";
         }
 
-        if (static::$minify) {
+        if (static::$minify && !empty($this->customJs)) {
             $this->js = $this->customJs;
             $this->css = $this->customCss;
         } else {
