@@ -763,7 +763,7 @@ class Builder implements Renderable
             $this->script[] = "lightyear.notify('{$this->notify[0]}', '{$this->notify[1]}', {$this->notify[2]}, '{$this->notify[3]}', '{$this->notify[4]}', '{$this->notify[5]}');";
         }
 
-        if (static::$minify) {
+        if (static::$minify && !empty($this->customJs)) {
             $this->js = $this->customJs;
             $this->css = $this->customCss;
         } else {
