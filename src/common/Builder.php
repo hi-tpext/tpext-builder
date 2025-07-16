@@ -104,7 +104,10 @@ class Builder implements Renderable
         if (self::$instance == null) {
             self::$instance = new static($title, $desc);
             self::$instance->created();
-            Context::set(static::class, self::$instance);
+            
+            if (self::$isWebmanContext) {
+                Context::set(static::class, self::$instance);
+            }
 
             ExtLoader::trigger('tpext_create_builder', self::$instance);
         } else {
