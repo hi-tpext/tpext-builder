@@ -4,6 +4,7 @@ namespace tpext\builder\displayer;
 
 use tpext\builder\traits\HasOptions;
 use tpext\builder\traits\HasWhen;
+use tpext\builder\common\Search;
 
 class Select extends Field
 {
@@ -150,6 +151,8 @@ class Select extends Field
             $delay = !empty($ajax['delay']) ? $ajax['delay'] : 250;
             $loadmore = $ajax['loadmore'];
 
+            $isSearch = $this->getForm() instanceof Search ? 'true' : 'false';
+
             $configs = json_encode($this->jsOptions);
 
             $configs = substr($configs, 1, strlen($configs) - 2);
@@ -219,6 +222,10 @@ class Select extends Field
 
         if(selected{$key} !== '')
         {
+            if({$isSearch}){
+                $('#{$selectId}').append('<option selected value="' + selected{$key} + '"></option>');
+            }
+
             var params = {
                 q: '',
                 page: 1,
@@ -252,6 +259,7 @@ class Select extends Field
                     }
                     else
                     {
+                        $('#{$selectId}').html('');
                         for(var i in list)
                         {
                             d = list[i];
@@ -427,7 +435,7 @@ EOT;
         if (!$this->group && !isset($this->options[''])) {
             $this->options = ['' => $this->jsOptions['placeholder']] + $this->options;
         }
-        
+
         foreach ($this->disabledOptions as &$di) {
             $di = '-' . $di;
         }
