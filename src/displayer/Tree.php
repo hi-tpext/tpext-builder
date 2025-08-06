@@ -312,7 +312,6 @@ class Tree extends Field
         $key = preg_replace('/\W/', '', $selectId);
 
         $configs = json_encode($this->jsOptions);
-        $configs = substr($configs, 1, strlen($configs) - 2);
 
         $zNodes = json_encode($this->options);
         $multiple = $this->multiple ? 1 : 0;
@@ -365,7 +364,7 @@ class Tree extends Field
             }
         };
 
-        treeObj{$key} = $.fn.zTree.init($("#{$selectId}-tree"), $.extend(true, setting{$key}, {$configs}, {$zNodes});
+        treeObj{$key} = $.fn.zTree.init($("#{$selectId}-tree"), $.extend(true, setting{$key}, {$configs}), {$zNodes});
 
 EOT;
         $this->script[] = $script;
