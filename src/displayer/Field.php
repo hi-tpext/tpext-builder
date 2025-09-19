@@ -258,7 +258,7 @@ class Field implements Fillable
     public function autoPost($url = '', $refresh = false)
     {
         if (empty($url)) {
-            $url = (string)url('autopost');
+            $url = (string) url('autopost');
         }
         $this->autoPost = $url;
         $this->autoPostRefresh = $refresh;
@@ -1171,6 +1171,10 @@ EOT;
         $to = $this->to;
 
         if ($to instanceof \Closure) {
+            //data 为空时可能引起错误
+            if (empty($this->value) && empty($this->default) && empty($this->data)) {
+                return '';
+            }
             return $to($value, $data);
         }
 
