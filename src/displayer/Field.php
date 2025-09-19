@@ -1171,6 +1171,10 @@ EOT;
         $to = $this->to;
 
         if ($to instanceof \Closure) {
+            //data 为空时可能引起错误
+            if (empty($this->value) && empty($this->default) && empty($this->data)) {
+                return '';
+            }
             return $to($value, $data);
         }
 
