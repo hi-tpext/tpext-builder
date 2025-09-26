@@ -11,6 +11,17 @@
 {/block}
 
 {block name="content"}
+<script type="text/javascript">
+  (function() {
+      if (localStorage.getItem('site_theme') === 'dark') {
+          document.documentElement.style.background = '#1c1e2f';
+          document.querySelector('body').setAttribute('data-theme', 'dark');
+      } else {
+          document.documentElement.style.background = '#fff';
+          document.querySelector('body').setAttribute('data-theme', '');
+      }
+  })();
+</script>
 <div class="panel panel-default content">
   {notempty name="$title"}
   <div class="panel-heading content-header">
@@ -41,6 +52,20 @@
 
       {$script|raw}
 
+      window.addEventListener('message', (event) => {
+          // 检查消息类型是否为更改主题
+          if (event.data.type === 'change_theme') {
+              // 获取主题值
+              const themeValue = event.data.value || event.data.theme;
+              // 根据主题值设置暗黑模式
+              if (themeValue === 'dark') {
+                  document.querySelector('body').setAttribute('data-theme', 'dark');
+              } else {
+                  document.querySelector('body').setAttribute('data-theme', '');
+              }
+          }
+      });
+      
     });
 </script>
 <div class="hidden" id="script-div"></div>
