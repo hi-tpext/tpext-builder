@@ -403,6 +403,7 @@ class MultipleFile extends Field
         }
 
         $thumbs = [];
+
         foreach ($this->files as $file) {
             if (strstr($file, '/assets/tpextbuilder/images/')) {
                 $thumbs[] = $file;
@@ -415,10 +416,10 @@ class MultipleFile extends Field
                 continue;
             }
 
-            $thumbFile = './thumb/' . md5($file) . '-' . $options['width'] . 'x' . $options['height'] . '.' . $ext;
+            $thumbFile = '/thumb/' . md5($file) . '-' . $options['width'] . 'x' . $options['height'] . '.' . $ext;
 
-            if (is_file($thumbFile)) {
-                $thumbs[] = ltrim($thumbFile, '.');
+            if (is_file(App::getPublicPath() .$thumbFile)) {
+                $thumbs[] = $thumbFile;
                 continue;
             }
 
@@ -428,7 +429,7 @@ class MultipleFile extends Field
                     $thumbs[] = $file;
                     continue;
                 }
-                if (!@file_put_contents($thumbFile, $data)) {
+                if (!@file_put_contents(App::getPublicPath() . $thumbFile, $data)) {
                     $thumbs[] = $file;
                     continue;
                 }
@@ -438,7 +439,7 @@ class MultipleFile extends Field
                 continue;
             }
             try {
-                $options['to_path'] = $thumbFile;
+                $options['to_path'] = App::getPublicPath() . $thumbFile;
                 $thumbs[] = $handler->resize($file, $options);
             } catch (\Exception $e) {
                 $thumbs[] = $file;
