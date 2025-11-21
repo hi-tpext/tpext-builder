@@ -984,6 +984,8 @@ $(function () {
         if (parent && parent.layer) {
             var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
             parent.layer.close(index);
+        } else if (window.opener) {
+            window.close();
         }
     });
 
