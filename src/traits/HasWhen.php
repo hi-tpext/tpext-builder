@@ -320,7 +320,9 @@ trait HasWhen
             });
         });
 
-        $("#{$watchFor}{$box}").trigger('change');
+        setTimeout(function(){
+            $("#{$watchFor}{$box}").trigger('change');
+        }, 10);
 
 EOT;
         $this->script[] = $script;
