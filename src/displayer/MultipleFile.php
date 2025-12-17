@@ -52,6 +52,7 @@ class MultipleFile extends Field
 
     protected $jsOptions = [
         'resize' => false,
+        'compress' => false, //前端压缩jpg图片设置，与后端压缩图片设置其中一种
         'duplicate' => true,
         'ext' => [
             //
