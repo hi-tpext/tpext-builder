@@ -598,6 +598,7 @@ window.renderFiles = function (elid) {
                 prepareNextFile: true,
                 duplicate: jsOptions.duplicate ? true : false,
                 resize: jsOptions.resize ? true : false,
+                compress: jsOptions.compress ? jsOptions.compress : false,
                 swf: jsOptions.swf_url,
                 server: jsOptions.upload_url,
                 pick: {
