@@ -348,11 +348,6 @@ td ul.lyear-uploads-pic li.pic-item {
     padding-left: 20px !important;
 }
 
-.checkbox-inline+.checkbox-inline,
-.radio-inline+.radio-inline {
-    margin-left: 7px !important;
-}
-
 .table .checkbox-div .lyear-checkbox,
 .table .radio-div .lyear-radio {
     margin: 2px 0 !important;
