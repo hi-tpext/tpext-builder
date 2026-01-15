@@ -60,14 +60,24 @@
                                         .layer_close_go, 'success');
                                 }
                                 else if (data.url) {
-                                    lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_succeeded')}", 'success');
+                                    if (lightyear) {
+                                        lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_succeeded')}", 'success');
+                                    }
+                                    else {
+                                        layer.msg(data.msg || data.message || "{:__blang('bilder_save_succeeded')}");
+                                    }
+
                                     setTimeout(function () {
                                         location.replace(data.url);
                                     }, data.wait * 1000 || 2000);
                                 }
                                 else {
-                                    lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_succeeded')}",
-                                        'success');
+                                    if (lightyear) {
+                                        lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_succeeded')}", 'success');
+                                    }
+                                    else {
+                                        layer.msg(data.msg || data.message || "{:__blang('bilder_save_succeeded')}");
+                                    }
                                 }
                             } else {
                                 if (data.layer_close) {
@@ -79,13 +89,7 @@
                                         .layer_close_go, 'danger');
                                 }
                                 else if (data.url) {
-                                    if (parent.lightyear) {
-                                        parent.lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_failed')}", 'danger');
-                                    }
-                                    else if (parent.layer) {
-                                        parent.layer.msg(data.msg || data.message || "{:__blang('bilder_save_failed')}");
-                                    }
-                                    else if (lightyear) {
+                                    if (lightyear) {
                                         lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_failed')}", 'danger');
                                     }
                                     else {
