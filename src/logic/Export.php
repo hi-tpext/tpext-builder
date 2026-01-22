@@ -38,7 +38,7 @@ class Export
 
             if (!is_dir($dir)) {
                 if (!mkdir($dir, 0755, true)) {
-                    return json(['code' => 0, 'msg' => __blang('bilder_make_dir_failed')]);
+                    return json(['code' => 0, 'msg' => __blang('builder_make_dir_failed')]);
                 }
             }
 
@@ -51,13 +51,13 @@ class Export
 
         $headerData = [];
         $body = '';
-        $encoding = __blang('bilder_export_encoding');
+        $encoding = __blang('builder_export_encoding');
 
         foreach ($displayers as $key => $displayer) {
             $label = $displayer->getLabel();
-            $label = preg_replace('/_?id$/i', __blang('bilder_column_id_replace'), $label);
+            $label = preg_replace('/_?id$/i', __blang('builder_column_id_replace'), $label);
             if ($encoding) {
-                $headerData[$key] = mb_convert_encoding($label, __blang('bilder_export_encoding'), "UTF-8");
+                $headerData[$key] = mb_convert_encoding($label, __blang('builder_export_encoding'), "UTF-8");
             } else {
                 $headerData[$key] = $label;
             }
@@ -109,7 +109,7 @@ class Export
         fclose($fp);
         if ($fname) {
             $file = str_replace(App::getRuntimePath() . 'export/', '', $fname);
-            return json(['code' => 1, 'msg' => __blang('bilder_file_has_been_generated'), 'data' => url('export') . '?path=' . $file]);
+            return json(['code' => 1, 'msg' => __blang('builder_file_has_been_generated'), 'data' => url('export') . '?path=' . $file]);
         } else {
             if (ExtLoader::isWebman()) {
                 $header = [
@@ -190,7 +190,7 @@ class Export
 
         foreach ($displayers as $k => $displayer) {
             $label = $displayer->getLabel();
-            $label = preg_replace('/_?id$/i', __blang('bilder_column_id_replace'), $label);
+            $label = preg_replace('/_?id$/i', __blang('builder_column_id_replace'), $label);
             $this->worksheet->setCellValue($list[$k] . '1', $label);
         }
         $num = 0;
@@ -232,7 +232,7 @@ class Export
 
                 if (!is_dir($dir)) {
                     if (!mkdir($dir, 0755, true)) {
-                        return json(['code' => 0, 'msg' => __blang('bilder_make_dir_failed')]);
+                        return json(['code' => 0, 'msg' => __blang('builder_make_dir_failed')]);
                     }
                 }
 
@@ -240,7 +240,7 @@ class Export
                 $objWriter->save($fname);
                 $obj->disconnectWorksheets();
                 $file = str_replace(App::getRuntimePath() . 'export/', '', $fname);
-                return json(['code' => 1, 'msg' => __blang('bilder_file_has_been_generated'), 'data' => url('export') . '?path=' . $file]);
+                return json(['code' => 1, 'msg' => __blang('builder_file_has_been_generated'), 'data' => url('export') . '?path=' . $file]);
             } else {
                 if (ExtLoader::isWebman()) {
                     ob_start();
@@ -271,7 +271,7 @@ class Export
                 $dir = App::getRuntimePath() . 'export/' . date('Ymd') . '/';
                 if (!is_dir($dir)) {
                     if (!mkdir($dir, 0755, true)) {
-                        return json(['code' => 0, 'msg' => __blang('bilder_make_dir_failed')]);
+                        return json(['code' => 0, 'msg' => __blang('builder_make_dir_failed')]);
                     }
                 }
 
@@ -280,7 +280,7 @@ class Export
                 $obj->disconnectWorksheets();
 
                 $file = str_replace(App::getRuntimePath() . 'export/', '', $fname);
-                return json(['code' => 1, 'msg' => __blang('bilder_file_has_been_generated'), 'data' => url('export') . '?path=' . $file]);
+                return json(['code' => 1, 'msg' => __blang('builder_file_has_been_generated'), 'data' => url('export') . '?path=' . $file]);
             } else {
                 if (ExtLoader::isWebman()) {
                     ob_start();
@@ -324,7 +324,7 @@ class Export
 
         foreach ($displayers as $k => $displayer) {
             $label = $displayer->getLabel();
-            $label = preg_replace('/_?id$/i', __blang('bilder_column_id_replace'), $label);
+            $label = preg_replace('/_?id$/i', __blang('builder_column_id_replace'), $label);
             $header[] = $label;
         }
         $num = 0;
@@ -347,7 +347,7 @@ class Export
         $dir = App::getRuntimePath() . 'export/' . date('Ymd') . '/';
         if (!is_dir($dir)) {
             if (!mkdir($dir, 0755, true)) {
-                return json(['code' => 0, 'msg' => __blang('bilder_make_dir_failed')]);
+                return json(['code' => 0, 'msg' => __blang('builder_make_dir_failed')]);
             }
         }
 
@@ -398,7 +398,7 @@ class Export
 
         if (!is_dir($dir2)) {
             if (!mkdir($dir2, 0755, true)) {
-                return json(['code' => 0, 'msg' => __blang('bilder_make_dir_failed')]);
+                return json(['code' => 0, 'msg' => __blang('builder_make_dir_failed')]);
             }
         }
 
@@ -434,7 +434,7 @@ class Export
         $file = str_replace(App::getRuntimePath() . 'export/', '', $zfile);
 
         if (request()->isAjax()) {
-            return json(['code' => 1, 'msg' => __blang('bilder_file_has_been_generated'), 'data' => url('export') . '?path=' . $file]);
+            return json(['code' => 1, 'msg' => __blang('builder_file_has_been_generated'), 'data' => url('export') . '?path=' . $file]);
         } else {
             return redirect(url('export') . '?path=' . $file);
         }

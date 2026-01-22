@@ -31,7 +31,7 @@ class Attachment extends Controller
     {
         $this->dataModel = new AttachmentModel;
 
-        $this->pageTitle = __blang('bilder_attachment_manage');
+        $this->pageTitle = __blang('builder_attachment_manage');
         $this->postAllowFields = ['name'];
         $this->pagesize = 8;
     }
@@ -78,8 +78,8 @@ class Attachment extends Controller
     {
         $search = $this->search;
 
-        $search->text('name', __blang('bilder_attachment_name'), '6 col-xs-6')->size('4 col-xs-4', '8 col-xs-8')->maxlength(55);
-        $search->text('url', __blang('bilder_attachment_url'), '6 col-xs-6')->size('4 col-xs-4', '8 col-xs-8')->maxlength(200);
+        $search->text('name', __blang('builder_attachment_name'), '6 col-xs-6')->size('4 col-xs-4', '8 col-xs-8')->maxlength(55);
+        $search->text('url', __blang('builder_attachment_url'), '6 col-xs-6')->size('4 col-xs-4', '8 col-xs-8')->maxlength(200);
 
         $exts = [];
         $arr = [];
@@ -96,7 +96,7 @@ class Attachment extends Controller
             $exts[$a] = $a;
         }
 
-        $search->multipleSelect('suffix', __blang('bilder_attachment_suffix'), '6 col-xs-6')->size('4 col-xs-4', '8 col-xs-8')->options($exts);
+        $search->multipleSelect('suffix', __blang('builder_attachment_suffix'), '6 col-xs-6')->size('4 col-xs-4', '8 col-xs-8')->options($exts);
     }
     /**
      * 构建表格
@@ -111,21 +111,21 @@ class Attachment extends Controller
         $limit = input('limit', 1);
 
         $table->show('id', 'ID');
-        $table->text('name', __blang('bilder_attachment_name'))->autoPost();
-        $table->file('file',  __blang('bilder_attachment_file'))->thumbSize(50, 50);
+        $table->text('name', __blang('builder_attachment_name'))->autoPost();
+        $table->file('file',  __blang('builder_attachment_file'))->thumbSize(50, 50);
         if (!$choose) {
-            $table->show('mime', __blang('bilder_attachment_mime'));
-            $table->show('size', __blang('bilder_attachment_size'))->to('{val}MB');
-            $table->show('suffix', __blang('bilder_attachment_suffix'))->getWrapper()->addStyle('width:80px');
-            $table->show('storage', __blang('bilder_attachment_storage'));
+            $table->show('mime', __blang('builder_attachment_mime'));
+            $table->show('size', __blang('builder_attachment_size'))->to('{val}MB');
+            $table->show('suffix', __blang('builder_attachment_suffix'))->getWrapper()->addStyle('width:80px');
+            $table->show('storage', __blang('builder_attachment_storage'));
         }
 
-        $table->raw('url', __blang('bilder_attachment_url'))->to('<a href="{val}" target="_blank">{val}</a>');
-        $table->show('create_time', __blang('bilder_attachment_create_time'))->getWrapper()->addStyle('width:160px');
+        $table->raw('url', __blang('builder_attachment_url'))->to('<a href="{val}" target="_blank">{val}</a>');
+        $table->show('create_time', __blang('builder_attachment_create_time'))->getWrapper()->addStyle('width:160px');
 
         $table->getToolbar()
             ->btnRefresh()
-            ->btnImport(url('uploadSuccess'), '', ['280px', '235px'], 0, __blang('bilder_upload_file_button'), 'btn-pink', 'mdi-cloud-upload', 'title="' . __blang('bilder_upload_nwe_file') . '"', '')
+            ->btnImport(url('uploadSuccess'), '', ['280px', '235px'], 0, __blang('builder_upload_file_button'), 'btn-pink', 'mdi-cloud-upload', 'title="' . __blang('builder_upload_nwe_file') . '"', '')
             ->btnToggleSearch();
 
         foreach ($data as &$d) {
@@ -138,12 +138,12 @@ class Attachment extends Controller
             $id = input('id');
             if ($limit > 1) {
                 $table->getToolbar()
-                    ->btnOpenChecked('#', __blang('bilder_choose_multiple_files_button'), 'btn-success', 'mdi-note-plus-outline', 'onclick="chooseMultipleUrlsAndClose()"');
+                    ->btnOpenChecked('#', __blang('builder_choose_multiple_files_button'), 'btn-success', 'mdi-note-plus-outline', 'onclick="chooseMultipleUrlsAndClose()"');
             } else {
                 $table->useCheckbox(false);
             }
             $table->getActionbar()
-                ->btnLink('choose', '#', __blang('bilder_choose_file_button'), 'btn-success', 'mdi-note-plus-outline', 'onclick="chooseUrlAndClose(this)"');
+                ->btnLink('choose', '#', __blang('builder_choose_file_button'), 'btn-success', 'mdi-note-plus-outline', 'onclick="chooseUrlAndClose(this)"');
 
             $script = <<<EOT
 
@@ -169,14 +169,14 @@ class Attachment extends Controller
                 }
                 $("input.table-row:checked").each(function (i, e) {
                     if(urls.length >= chooseUrlLimit) {
-                        parent.lightyear.notify(__blang.bilder_maximum_upload_files_num_is + chooseUrlLimit, 'danger');
+                        parent.lightyear.notify(__blang.builder_maximum_upload_files_num_is + chooseUrlLimit, 'danger');
                         return false;
                     }
                     urls.push($(e).parents('tr').find('.row-url-td').find('a').attr('href'));
                 });
 
                 if(!urls.length){
-                    lightyear.notify(__blang.bilder_data_not_found);
+                    lightyear.notify(__blang.builder_data_not_found);
                     return;
                 }
 
@@ -204,9 +204,9 @@ EOT;
      */
     public function uploadSuccess()
     {
-        $builder = $this->builder(__blang('bilder_file_uploading_succeeded'));
+        $builder = $this->builder(__blang('builder_file_uploading_succeeded'));
 
-        $builder->addScript('parent.lightyear.notify("' . __blang('bilder_file_uploading_succeeded') . '","success");parent.$(".search-refresh").trigger("click");parent.layer.close(parent.layer.getFrameIndex(window.name));'); //刷新列表页
+        $builder->addScript('parent.lightyear.notify("' . __blang('builder_file_uploading_succeeded') . '","success");parent.$(".search-refresh").trigger("click");parent.layer.close(parent.layer.getFrameIndex(window.name));'); //刷新列表页
 
         return $builder->render();
     }

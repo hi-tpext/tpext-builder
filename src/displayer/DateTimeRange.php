@@ -84,13 +84,13 @@ class DateTimeRange extends Text
             $this->jsOptions['locale']['separator'] = $this->separator;
         }
         if (empty($this->jsOptions['locale']['applyLabel'])) {
-            $this->jsOptions['locale']['applyLabel'] = __blang('bilder_button_ok');
+            $this->jsOptions['locale']['applyLabel'] = __blang('builder_button_ok');
         }
         if (empty($this->jsOptions['locale']['cancelLabel'])) {
-            $this->jsOptions['locale']['cancelLabel'] = __blang('bilder_button_cancel');
+            $this->jsOptions['locale']['cancelLabel'] = __blang('builder_button_cancel');
         }
         if (empty($this->jsOptions['locale']['customRangeLabel'])) {
-            $this->jsOptions['locale']['customRangeLabel'] = __blang('bilder_custom_range_label');
+            $this->jsOptions['locale']['customRangeLabel'] = __blang('builder_custom_range_label');
         }
 
         $language = empty($this->jsOptions['language']) ?  'zh-cn' : $this->jsOptions['language'];

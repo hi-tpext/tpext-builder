@@ -52,19 +52,19 @@
                             }, 500);
                             if (data.status || data.code) {
                                 if (data.layer_close) {
-                                    that.closeLayer(data.msg || data.message || "{:__blang('bilder_save_succeeded')}", 'success');
+                                    that.closeLayer(data.msg || data.message || "{:__blang('builder_save_succeeded')}", 'success');
                                 } else if (data.layer_close_refresh) {
-                                    that.closeLayerRefresh(data.msg || data.message || "{:__blang('bilder_save_succeeded')}", 'success');
+                                    that.closeLayerRefresh(data.msg || data.message || "{:__blang('builder_save_succeeded')}", 'success');
                                 } else if (data.layer_close_go) {
-                                    that.closeLayerGo(data.msg || data.message || "{:__blang('bilder_save_succeeded')}", data
+                                    that.closeLayerGo(data.msg || data.message || "{:__blang('builder_save_succeeded')}", data
                                         .layer_close_go, 'success');
                                 }
                                 else if (data.url) {
                                     if (lightyear) {
-                                        lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_succeeded')}", 'success');
+                                        lightyear.notify(data.msg || data.message || "{:__blang('builder_save_succeeded')}", 'success');
                                     }
                                     else {
-                                        layer.msg(data.msg || data.message || "{:__blang('bilder_save_succeeded')}");
+                                        layer.msg(data.msg || data.message || "{:__blang('builder_save_succeeded')}");
                                     }
 
                                     setTimeout(function () {
@@ -73,27 +73,27 @@
                                 }
                                 else {
                                     if (lightyear) {
-                                        lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_succeeded')}", 'success');
+                                        lightyear.notify(data.msg || data.message || "{:__blang('builder_save_succeeded')}", 'success');
                                     }
                                     else {
-                                        layer.msg(data.msg || data.message || "{:__blang('bilder_save_succeeded')}");
+                                        layer.msg(data.msg || data.message || "{:__blang('builder_save_succeeded')}");
                                     }
                                 }
                             } else {
                                 if (data.layer_close) {
-                                    that.closeLayer(data.msg || data.message || "{:__blang('bilder_save_failed')}", 'danger');
+                                    that.closeLayer(data.msg || data.message || "{:__blang('builder_save_failed')}", 'danger');
                                 } else if (data.layer_close_refresh) {
-                                    that.closeLayerRefresh(data.msg || data.message || "{:__blang('bilder_save_failed')}", 'danger');
+                                    that.closeLayerRefresh(data.msg || data.message || "{:__blang('builder_save_failed')}", 'danger');
                                 } else if (data.layer_close_go) {
-                                    that.closeLayerGo(data.msg || data.message || "{:__blang('bilder_save_failed')}", data
+                                    that.closeLayerGo(data.msg || data.message || "{:__blang('builder_save_failed')}", data
                                         .layer_close_go, 'danger');
                                 }
                                 else if (data.url) {
                                     if (lightyear) {
-                                        lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_failed')}", 'danger');
+                                        lightyear.notify(data.msg || data.message || "{:__blang('builder_save_failed')}", 'danger');
                                     }
                                     else {
-                                        layer.msg(data.msg || data.message || "{:__blang('bilder_save_failed')}");
+                                        layer.msg(data.msg || data.message || "{:__blang('builder_save_failed')}");
                                     }
 
                                     setTimeout(function () {
@@ -102,10 +102,10 @@
                                 }
                                 else {
                                     if (lightyear) {
-                                        lightyear.notify(data.msg || data.message || "{:__blang('bilder_save_failed')}", 'danger');
+                                        lightyear.notify(data.msg || data.message || "{:__blang('builder_save_failed')}", 'danger');
                                     }
                                     else {
-                                        layer.msg(data.msg || data.message || "{:__blang('bilder_save_failed')}");
+                                        layer.msg(data.msg || data.message || "{:__blang('builder_save_failed')}");
                                     }
                                 }
                             }
@@ -121,7 +121,7 @@
                         },
                         error: function () {
                             lightyear.loading('hide');
-                            lightyear.notify("{:__blang('bilder_network_error')}", 'danger');
+                            lightyear.notify("{:__blang('builder_network_error')}", 'danger');
                         }
                     });
 

@@ -50,7 +50,7 @@
                         },
                         error: function () {
                             lightyear.loading('hide');
-                            lightyear.notify("{:__blang('bilder_network_error')}", 'danger');
+                            lightyear.notify("{:__blang('builder_network_error')}", 'danger');
                         }
                     });
 
@@ -86,11 +86,11 @@
                 if (ajax) {
                     var loading = layer.open({
                         type: 1,
-                        title: "{:__blang('bilder_operation_tips')}",
+                        title: "{:__blang('builder_operation_tips')}",
                         closeBtn: 0, //不显示关闭按钮
                         anim: 2,
                         shadeClose: false, //开启遮罩关闭
-                        content: '<p style="padding:10px 20px;color:green;"><img src="/assets/tpextbuilder/js/layer/theme/default/loading-1.gif">' + "{:__blang('bilder_generating_data')}" + '</p>'
+                        content: '<p style="padding:10px 20px;color:green;"><img src="/assets/tpextbuilder/js/layer/theme/default/loading-1.gif">' + "{:__blang('builder_generating_data')}" + '</p>'
                     });
 
                     var postdata = $('#{$id} form').serialize();
@@ -106,7 +106,7 @@
                                     //数据太多，打开页面，分页处理
                                     layer.open({
                                         type: 2,
-                                        title: "{:__blang('bilder_generating_data')}",
+                                        title: "{:__blang('builder_generating_data')}",
                                         scrollbar: false,
                                         area: ['400px', '150px'],
                                         content: url + '?' + postdata
@@ -116,20 +116,20 @@
                                     var filename = data.data.replace(/.+?([^\/]+)$/, '$1');
                                     layer.open({
                                         type: 1,
-                                        title: "{:__blang('bilder_download_file')}",
+                                        title: "{:__blang('builder_download_file')}",
                                         shadeClose: false,
                                         area: ['400px', '150px'],
-                                        content: '<div class="alert alert-success " role="alert" style="widht:94%;margin:2%;"><p>' + "{:__blang('bilder_file_has_been_generated')}" + '</p><a onclick="layer.closeAll();" target="_blank" href="' + data.data + '">' + filename + '</a></div>',
+                                        content: '<div class="alert alert-success " role="alert" style="widht:94%;margin:2%;"><p>' + "{:__blang('builder_file_has_been_generated')}" + '</p><a onclick="layer.closeAll();" target="_blank" href="' + data.data + '">' + filename + '</a></div>',
                                     });
                                 }
                             }
                             else {
-                                layer.alert("{:__blang('bilder_operation_failed')}-" + data.msg);
+                                layer.alert("{:__blang('builder_operation_failed')}-" + data.msg);
                             }
                         },
                         error: function () {
                             layer.close(loading);
-                            lightyear.notify("{:__blang('bilder_network_error')}", 'danger');
+                            lightyear.notify("{:__blang('builder_network_error')}", 'danger');
                         }
                     });
                 } else {

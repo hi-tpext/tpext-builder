@@ -101,7 +101,7 @@ class Text extends Field
         $vars = array_merge($vars, [
             'befor' => $this->befor,
             'after' => $this->after,
-            'placeholder' => $this->placeholder ?: __blang('bilder_please_enter') . $this->label
+            'placeholder' => $this->placeholder ?: __blang('builder_please_enter') . $this->label
         ]);
 
         $viewshow = $this->getViewInstance();

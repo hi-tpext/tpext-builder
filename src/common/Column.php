@@ -225,7 +225,7 @@ class Column extends Widget
             return $widget;
         }
 
-        throw new \InvalidArgumentException(__blang('bilder_invalid_argument_exception') . ' : ' . $name);
+        throw new \InvalidArgumentException(__blang('builder_invalid_argument_exception') . ' : ' . $name);
     }
 
     public function destroy()

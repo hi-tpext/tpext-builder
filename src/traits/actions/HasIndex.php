@@ -89,7 +89,7 @@ trait HasIndex
             request()->withPost(request()->get()); //兼容以post方式获取参数
         }
 
-        $builder = $this->builder($this->pageTitle, $this->indexText ?: __blang('bilder_page_index_text'), 'index');
+        $builder = $this->builder($this->pageTitle, $this->indexText ?: __blang('builder_page_index_text'), 'index');
 
         $this->createTable($builder);
 
@@ -146,7 +146,7 @@ trait HasIndex
                 $this->treeTextField,
                 $this->treeIdField,
                 $this->treeParentIdField,
-                $this->treeRootText ?: __blang('bilder_left_tree_text_all')
+                $this->treeRootText ?: __blang('builder_left_tree_text_all')
             );
 
             $tree->trigger('.row-' . $this->treeKey);

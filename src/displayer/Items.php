@@ -280,12 +280,12 @@ class Items extends Field
                 if(!{$key}CanRecover) {
                     var that = $(this);
                     $.alert({
-                        title: __blang.bilder_operation_tips,
-                        content: __blang.bilder_confirm_to_do_operation + ' <strong>' + __blang.bilder_remove + '</strong> ' + __blang.bilder_action_operation + ' ?',
+                        title: __blang.builder_operation_tips,
+                        content: __blang.builder_confirm_to_do_operation + ' <strong>' + __blang.builder_remove + '</strong> ' + __blang.builder_action_operation + ' ?',
                         type: 'orange',
                         buttons: {
                             confirm: {
-                                text: __blang.bilder_button_ok,
+                                text: __blang.builder_button_ok,
                                 btnClass: 'btn-primary',
                                 action: function () {
                                     that.prev('input').val(1);
@@ -294,7 +294,7 @@ class Items extends Field
                                 }
                             },
                             cancel: {
-                                text: __blang.bilder_button_cancel,
+                                text: __blang.builder_button_cancel,
                                 action: function () {
 
                                 }
@@ -303,14 +303,14 @@ class Items extends Field
                     });
                 } else {
                     $(this).prev('input').val(1);
-                    $(this).removeClass('btn-danger').addClass('btn-success').attr('title', __blang.bilder_recover);
+                    $(this).removeClass('btn-danger').addClass('btn-success').attr('title', __blang.builder_recover);
                     $(this).children('i').removeClass('mdi-delete').addClass('mdi-restart');
                     $(this).parents('td').prevAll('td').find('.item-field-required').addClass('ignore').removeClass('has-error');
                 }
            }
            else if(del === '1') {
                 $(this).prev('input').val(0);
-                $(this).removeClass('btn-success').addClass('btn-danger').attr('title', __blang.bilder_remove);
+                $(this).removeClass('btn-success').addClass('btn-danger').attr('title', __blang.builder_remove);
                 $(this).children('i').removeClass('mdi-restart').addClass('mdi-delete');
                 $(this).parents('td').prevAll('td').find('.item-field-required').removeClass('ignore');
            }

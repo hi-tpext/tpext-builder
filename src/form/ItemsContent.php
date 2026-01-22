@@ -70,8 +70,8 @@ class ItemsContent extends FWrapper
     {
         $this->class = 'table-striped table-hover table-bordered table-condensed table-responsive';
 
-        $this->actionRowText = __blang('bilder_action_operation');
-        $this->emptyText = '<span>' . __blang('bilder_no_relevant_data') . '</span>';
+        $this->actionRowText = __blang('builder_action_operation');
+        $this->emptyText = '<span>' . __blang('builder_no_relevant_data') . '</span>';
     }
 
     /**
@@ -356,7 +356,7 @@ class ItemsContent extends FWrapper
             $isRequired = $displayer->isRequired();
 
             if ($isRequired) {
-                $this->headers[$key] = $displayer->getLabel() . '<strong title="' . __blang('bilder_this_field_is_required') . '" class="field-required">*</strong>';
+                $this->headers[$key] = $displayer->getLabel() . '<strong title="' . __blang('builder_this_field_is_required') . '" class="field-required">*</strong>';
             }
 
             $displayer->required(false);
@@ -447,7 +447,7 @@ class ItemsContent extends FWrapper
             return $col->$name($arguments[0], $col->getLabel());
         }
 
-        throw new \InvalidArgumentException(__blang('bilder_invalid_argument_exception') . ' : ' . $name);
+        throw new \InvalidArgumentException(__blang('builder_invalid_argument_exception') . ' : ' . $name);
     }
 
     public function destroy()

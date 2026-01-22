@@ -354,7 +354,7 @@ class MultipleFile extends Field
             'thumbs' => $this->thumbs(),
             'cover' => $this->cover,
             'inputType' => $this->showInput ? 'text' : 'hidden',
-            'placeholder' => $this->placeholder ?: __blang('bilder_please_enter') . $this->label
+            'placeholder' => $this->placeholder ?: __blang('builder_please_enter') . $this->label
         ]);
 
         $viewshow = $this->getViewInstance();
@@ -384,7 +384,7 @@ class MultipleFile extends Field
             return $this;
         }
 
-        throw new \InvalidArgumentException(__blang('bilder_invalid_argument_exception') . ' : ' . $name);
+        throw new \InvalidArgumentException(__blang('builder_invalid_argument_exception') . ' : ' . $name);
     }
 
     /**

@@ -234,6 +234,6 @@ class FieldsContent extends TWrapper implements Renderable
             return $col->$name($arguments[0], $col->getLabel());
         }
 
-        throw new \InvalidArgumentException(__blang('bilder_invalid_argument_exception') . ' : ' . $name);
+        throw new \InvalidArgumentException(__blang('builder_invalid_argument_exception') . ' : ' . $name);
     }
 }
