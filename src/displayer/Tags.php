@@ -70,7 +70,7 @@ EOT;
     public function customVars()
     {
         return [
-            'placeholder' => $this->placeholder ?: __blang('bilder_please_enter') . $this->label
+            'placeholder' => $this->placeholder ?: __blang('builder_please_enter') . $this->label
         ];
     }
 }

@@ -218,7 +218,7 @@ class Tree extends Field
         $tree = [];
 
         if ($rootText == '全部') {
-            $rootText = __blang('bilder_left_tree_text_all') . $this->getlabel();
+            $rootText = __blang('builder_left_tree_text_all') . $this->getlabel();
         }
 
         if ($rootText) {

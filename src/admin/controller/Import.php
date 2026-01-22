@@ -28,7 +28,7 @@ class Import extends Controller
         $driver = input('driver', '');
 
         if ($fileSize == '' || empty($pageToken) || empty($successUrl)) {
-            $this->error(__blang('bilder_parameter_error'));
+            $this->error(__blang('builder_parameter_error'));
         }
 
         $importpagetoken = Session::get('importpagetoken');
@@ -36,7 +36,7 @@ class Import extends Controller
         $_pageToken = md5($importpagetoken . $acceptedExts . $fileSize);
 
         if ($_pageToken != $pageToken) {
-            $this->error(__blang('bilder_validate_failed'));
+            $this->error(__blang('builder_validate_failed'));
         }
 
         $config = Module::getInstance()->getConfig();
@@ -77,14 +77,14 @@ class Import extends Controller
             acceptedFiles: "{$acceptedExts}", // 上传的类型
             addRemoveLinks: false,
             parallelUploads: 1,// 一次上传的文件数量
-            dictDefaultMessage: __blang.bilder_dropzone_default_message,
-            dictMaxFilesExceeded: __blang.bilder_dropzone_max_files_exceeded.replace('{num}',1),
-            dictResponseError: __blang.bilder_file_uploading_failed,
-            dictInvalidFileType: __blang.bilder_dropzone_invalid_file_type,
-            dictFallbackMessage: __blang.bilder_dropzone_fallback_message,
-            dictFileTooBig: __blang.bilder_dropzone_file_too_big,
-            dictRemoveLinks: __blang.bilder_dropzone_remove_links,
-            dictCancelUpload: __blang.bilder_dropzone_cancel_upload,
+            dictDefaultMessage: __blang.builder_dropzone_default_message,
+            dictMaxFilesExceeded: __blang.builder_dropzone_max_files_exceeded.replace('{num}',1),
+            dictResponseError: __blang.builder_file_uploading_failed,
+            dictInvalidFileType: __blang.builder_dropzone_invalid_file_type,
+            dictFallbackMessage: __blang.builder_dropzone_fallback_message,
+            dictFileTooBig: __blang.builder_dropzone_file_too_big,
+            dictRemoveLinks: __blang.builder_dropzone_remove_links,
+            dictCancelUpload: __blang.builder_dropzone_cancel_upload,
             init: function () {
                 this.on("addedfile", function (file) {
                     // 上传文件时触发的事件
@@ -94,13 +94,13 @@ class Import extends Controller
                         location.href = '{$successUrl}?fileurl=' + encodeURI(data.picurl.split('?')[0]);
                     }
                     else {
-                        parent.lightyear.notify(__blang.bilder_file_uploading_failed + data.info, 'danger');
+                        parent.lightyear.notify(__blang.builder_file_uploading_failed + data.info, 'danger');
                     }
                     // 上传成功触发的事件
                 });
                 this.on("error", function (file, data) {
                     // 上传失败触发的事件
-                    parent.lightyear.notify(__blang.bilder_file_uploading_failed + '-' + data, 'danger');
+                    parent.lightyear.notify(__blang.builder_file_uploading_failed + '-' + data, 'danger');
                 });
             }
         });
@@ -119,7 +119,7 @@ EOT;
      */
     public function afterSuccess()
     {
-        $builder = Builder::getInstance(__blang('bilder_operation_tips'));
+        $builder = Builder::getInstance(__blang('builder_operation_tips'));
 
         $fileurl = input('fileurl');
 

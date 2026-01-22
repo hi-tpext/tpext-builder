@@ -120,7 +120,7 @@ class ZTree extends Widget implements Renderable
         $tree = [];
 
         if ($rootText == '全部') {
-            $rootText = __blang('bilder_left_tree_text_all');
+            $rootText = __blang('builder_left_tree_text_all');
         }
 
         if ($rootText) {
@@ -300,7 +300,7 @@ EOT;
 
             if(!rightTree.find('.show-left').length)
             {
-                rightTree.append('<a href="#" title="' + __blang.bilder_action_open_left_tree + '" class="show-left"><i class="mdi mdi-format-horizontal-align-right"></i></a>');
+                rightTree.append('<a href="#" title="' + __blang.builder_action_open_left_tree + '" class="show-left"><i class="mdi mdi-format-horizontal-align-right"></i></a>');
             }
             else
             {

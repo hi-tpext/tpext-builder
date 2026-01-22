@@ -109,7 +109,7 @@
 
             if (values.length == 0) {
 
-                lightyear.notify(__blang.bilder_no_data_was_selected, 'warning');
+                lightyear.notify(__blang.builder_no_data_was_selected, 'warning');
 
                 return false;
             }
@@ -119,15 +119,15 @@
             if (confirm && confirm != '0' && confirm != 'false') {
                 if (confirm == '1') {
                     var text = $('#' + id).text().trim() || $(this).attr('title');
-                    confirm = __blang.bilder_confirm_to_do_batch_operation + ' <strong>' + text + '</strong> ' + __blang.bilder_action_operation + ' ?';
+                    confirm = __blang.builder_confirm_to_do_batch_operation + ' <strong>' + text + '</strong> ' + __blang.builder_action_operation + ' ?';
                 }
                 $.alert({
-                    title: __blang.bilder_operation_tips,
+                    title: __blang.builder_operation_tips,
                     content: confirm,
                     type: 'orange',
                     buttons: {
                         confirm: {
-                            text: __blang.bilder_button_ok,
+                            text: __blang.builder_button_ok,
                             btnClass: 'btn-primary',
                             action: function () {
                                 tpextbuilder.autoSendData({
@@ -136,7 +136,7 @@
                             }
                         },
                         cancel: {
-                            text: __blang.bilder_button_cancel,
+                            text: __blang.builder_button_cancel,
                             action: function () {
 
                             }
@@ -189,7 +189,7 @@
 
             if (values.length == 0) {
 
-                lightyear.notify(__blang.bilder_no_data_was_selected, 'warning');
+                lightyear.notify(__blang.builder_no_data_was_selected, 'warning');
 
                 return false;
             }
@@ -246,7 +246,7 @@
 
             if (values.length == 0) {
 
-                lightyear.notify(__blang.bilder_no_data_was_selected, 'warning');
+                lightyear.notify(__blang.builder_no_data_was_selected, 'warning');
 
                 return false;
             }
@@ -256,15 +256,15 @@
             if (confirm && confirm != '0' && confirm != 'false') {
                 if (confirm == '1') {
                     var text = $(this).text().trim();
-                    confirm = __blang.bilder_confirm_to_do_batch_operation + ' <strong>' + text + '</strong> ' + __blang.bilder_action_operation + ' ?';
+                    confirm = __blang.builder_confirm_to_do_batch_operation + ' <strong>' + text + '</strong> ' + __blang.builder_action_operation + ' ?';
                 }
                 $.alert({
-                    title: __blang.bilder_operation_tips,
+                    title: __blang.builder_operation_tips,
                     content: confirm,
                     type: 'orange',
                     buttons: {
                         confirm: {
-                            text: __blang.bilder_button_ok,
+                            text: __blang.builder_button_ok,
                             btnClass: 'btn-primary',
                             action: function () {
                                 tpextbuilder.autoSendData({
@@ -273,7 +273,7 @@
                             }
                         },
                         cancel: {
-                            text: __blang.bilder_button_cancel,
+                            text: __blang.builder_button_cancel,
                             action: function () {
 
                             }
@@ -315,16 +315,16 @@
             var val = $(this).data('id');
             if (confirm && confirm != '0' && confirm != 'false') {
                 if (confirm == '1') {
-                    var text = $(this).text().trim() || $(this).attr('title') || __blang.bilder_this;
-                    confirm = __blang.bilder_confirm_to_do_operation + ' <strong>' + text + '</strong> ' + __blang.bilder_action_operation + ' ?';
+                    var text = $(this).text().trim() || $(this).attr('title') || __blang.builder_this;
+                    confirm = __blang.builder_confirm_to_do_operation + ' <strong>' + text + '</strong> ' + __blang.builder_action_operation + ' ?';
                 }
                 $.alert({
-                    title: __blang.bilder_operation_tips,
+                    title: __blang.builder_operation_tips,
                     content: confirm,
                     type: 'orange',
                     buttons: {
                         confirm: {
-                            text: __blang.bilder_button_ok,
+                            text: __blang.builder_button_ok,
                             btnClass: 'btn-primary',
                             action: function () {
                                 tpextbuilder.autoSendData({
@@ -333,7 +333,7 @@
                             }
                         },
                         cancel: {
-                            text: __blang.bilder_button_cancel,
+                            text: __blang.builder_button_cancel,
                             action: function () {
 
                             }
@@ -357,8 +357,8 @@
             var val = $('.row-__action__ .' + classname).data('id');
             if (confirm && confirm != '0' && confirm != 'false') {
                 if (confirm == '1') {
-                    var text = $(this).text().trim() || $(this).attr('title') || __blang.bilder_this;
-                    confirm = __blang.bilder_confirm_to_do_operation + ' <strong>' + text + '</strong> ' + __blang.bilder_action_operation + ' ?';
+                    var text = $(this).text().trim() || $(this).attr('title') || __blang.builder_this;
+                    confirm = __blang.builder_confirm_to_do_operation + ' <strong>' + text + '</strong> ' + __blang.builder_action_operation + ' ?';
                 }
                 else if (confirm == '2') {
                     var size = $('.' + classname).find('.btn-actions').data('layer-size');
@@ -367,12 +367,12 @@
                     return false;
                 }
                 $.alert({
-                    title: __blang.bilder_operation_tips,
+                    title: __blang.builder_operation_tips,
                     content: confirm,
                     type: 'orange',
                     buttons: {
                         confirm: {
-                            text: __blang.bilder_button_ok,
+                            text: __blang.builder_button_ok,
                             btnClass: 'btn-primary',
                             action: function () {
                                 tpextbuilder.autoSendData({
@@ -381,7 +381,7 @@
                             }
                         },
                         cancel: {
-                            text: __blang.bilder_button_cancel,
+                            text: __blang.builder_button_cancel,
                             action: function () {
 
                             }
@@ -411,12 +411,12 @@
                     w.__token__ = data.__token__;
                 }
                 if (data.status || data.code) {
-                    lightyear.notify(data.msg || data.message || __blang.bilder_operation_succeeded, 'success');
+                    lightyear.notify(data.msg || data.message || __blang.builder_operation_succeeded, 'success');
                     if (refresh) {
                         $('.search-refresh').trigger('click');
                     }
                 } else {
-                    lightyear.notify(data.msg || data.message || __blang.bilder_operation_failed, 'warning');
+                    lightyear.notify(data.msg || data.message || __blang.builder_operation_failed, 'warning');
                 }
                 if (data.script || (data.data && data.data.script)) {
                     var script = data.script || data.data.script;
@@ -430,7 +430,7 @@
             },
             error: function () {
                 lightyear.loading('hide');
-                lightyear.notify(__blang.bilder_network_error, 'danger');
+                lightyear.notify(__blang.builder_network_error, 'danger');
             }
         });
     };
@@ -479,9 +479,9 @@
                         return false; //阻止系统默认回车事件
                     }
                     if (event.keyCode === 0x1B) {
-                        var index2 = layer.msg(__blang.bilder_confirm_close_this_window, {
+                        var index2 = layer.msg(__blang.builder_confirm_close_this_window, {
                             time: 2000,
-                            btn: [__blang.bilder_button_ok, __blang.bilder_button_cancel],
+                            btn: [__blang.builder_button_ok, __blang.builder_button_cancel],
                             yes: function (params) {
                                 layer.close(index);
                                 layer.close(index2);
@@ -609,7 +609,7 @@ window.renderFiles = function (elid) {
                 fileNumLimit: 99,
                 fileSizeLimit: jsOptions.fileSizeLimit,
                 accept: {
-                    title: __blang.bilder_file,
+                    title: __blang.builder_file,
                     extensions: $ext,
                     mimeTypes: jsOptions.mimeTypes || '*/*'
                 },
@@ -628,7 +628,7 @@ window.renderFiles = function (elid) {
 
             uploader.on('beforeFileQueued', function (file) {
                 if (jsOptions.fileNumLimit > 1 && $file_list.find('li.pic-item').size() >= jsOptions.fileNumLimit) {
-                    lightyear.notify(__blang.bilder_maximum_upload_files_num_is + jsOptions.fileNumLimit, 'danger');
+                    lightyear.notify(__blang.builder_maximum_upload_files_num_is + jsOptions.fileNumLimit, 'danger');
                     return false;
                 }
             });
@@ -639,8 +639,8 @@ window.renderFiles = function (elid) {
                     '    <img>' +
                     '</div>' +
                     '    <figcaption>' +
-                    '      <a title="' + __blang.bilder_action_view + '" class="btn btn-xs btn-round btn-square btn-primary btn-link-pic" href="javascript:;"><i class="mdi mdi-eye"></i></a>' +
-                    '      <a title="' + __blang.bilder_action_delete + '" class="btn btn-xs btn-round btn-square btn-danger btn-remove-pic" href="javascript:;"><i class="mdi mdi-delete"></i></a>' +
+                    '      <a title="' + __blang.builder_action_view + '" class="btn btn-xs btn-round btn-square btn-primary btn-link-pic" href="javascript:;"><i class="mdi mdi-eye"></i></a>' +
+                    '      <a title="' + __blang.builder_action_delete + '" class="btn btn-xs btn-round btn-square btn-danger btn-remove-pic" href="javascript:;"><i class="mdi mdi-delete"></i></a>' +
                     '    </figcaption>' +
                     '  </figure>' +
                     '</li>'),
@@ -713,7 +713,7 @@ window.renderFiles = function (elid) {
             });
             uploader.on('uploadError', function (file) {
                 var $li = $('#' + file.id);
-                $('<div class="error upload-result">' + __blang.bilder_file_uploading_failed + '</div>').appendTo($li).find('figure');
+                $('<div class="error upload-result">' + __blang.builder_file_uploading_failed + '</div>').appendTo($li).find('figure');
                 setTimeout(function () {
                     $li.remove();
                 }, 3000);
@@ -721,10 +721,10 @@ window.renderFiles = function (elid) {
             uploader.on('error', function (type) {
                 switch (type) {
                     case 'Q_TYPE_DENIED':
-                        lightyear.notify(__blang.bilder_file_type_suffix_allowed_is + $ext + __blang.bilder_please_upload_again, 'danger');
+                        lightyear.notify(__blang.builder_file_type_suffix_allowed_is + $ext + __blang.builder_please_upload_again, 'danger');
                         break;
                     case 'F_EXCEED_SIZE':
-                        lightyear.notify(__blang.bilder_file_size_cannot_exceed + ($size / 1024) + 'kb' + __blang.bilder_please_upload_again, 'danger');
+                        lightyear.notify(__blang.builder_file_size_cannot_exceed + ($size / 1024) + 'kb' + __blang.builder_please_upload_again, 'danger');
                         break;
                 }
             });
@@ -738,11 +738,11 @@ window.renderFiles = function (elid) {
                 var url = $(this).data('url');
                 var that = $(this);
                 $.alert({
-                    title: __blang.bilder_operation_tips,
-                    content: __blang.bilder_confirm_to_remove_file,
+                    title: __blang.builder_operation_tips,
+                    content: __blang.builder_confirm_to_remove_file,
                     buttons: {
                         confirm: {
-                            text: __blang.bilder_button_ok,
+                            text: __blang.builder_button_ok,
                             btnClass: 'btn-primary',
                             action: function () {
                                 if (jsOptions.fileNumLimit > 1) {
@@ -770,7 +770,7 @@ window.renderFiles = function (elid) {
                             }
                         },
                         cancel: {
-                            text: __blang.bilder_button_cancel,
+                            text: __blang.builder_button_cancel,
                             action: function () {
 
                             }
@@ -799,7 +799,7 @@ window.chooseFile = function (id, $input_file_name) {
     var chooseUrl = jsOptions.chooseUrl || '/admin/attachment/index?';
 
     if (jsOptions.fileNumLimit > 1 && $file_list.find('li.pic-item').size() >= jsOptions.fileNumLimit) {
-        lightyear.notify(__blang.bilder_maximum_upload_files_num_is + jsOptions.fileNumLimit, 'danger');
+        lightyear.notify(__blang.builder_maximum_upload_files_num_is + jsOptions.fileNumLimit, 'danger');
         return false;
     }
 
@@ -813,7 +813,7 @@ window.chooseFile = function (id, $input_file_name) {
 
     layer.open({
         type: 2,
-        title: __blang.bilder_choose_uploaded_file,
+        title: __blang.builder_choose_uploaded_file,
         shadeClose: false,
         scrollbar: false,
         shade: 0.3,
@@ -827,9 +827,9 @@ window.chooseFile = function (id, $input_file_name) {
                     return false; //阻止系统默认回车事件
                 }
                 if (event.keyCode === 0x1B) {
-                    var index2 = layer.msg(__blang.bilder_confirm_close_this_window, {
+                    var index2 = layer.msg(__blang.builder_confirm_close_this_window, {
                         time: 2000,
-                        btn: [__blang.bilder_button_ok, __blang.bilder_button_cancel],
+                        btn: [__blang.builder_button_ok, __blang.builder_button_cancel],
                         yes: function (params) {
                             layer.close(index);
                             layer.close(index2);

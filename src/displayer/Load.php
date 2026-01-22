@@ -20,7 +20,7 @@ class Load extends Field
 
     public function created($fieldType = '')
     {
-        $this->loadingText = __blang('bilder_loading');
+        $this->loadingText = __blang('builder_loading');
         parent::created($fieldType);
         return $this;
     }
@@ -109,17 +109,17 @@ class Load extends Field
                         d = list[i];
                         texts.push(d.__text__ || d['{$text}'] || d.text);
                     }
-                    $('#{$selectId}').text(texts.length ? texts.join('{$separator}') : __blang.bilder_value_is_empty);
+                    $('#{$selectId}').text(texts.length ? texts.join('{$separator}') : __blang.builder_value_is_empty);
                 },
                 error:function(){
                     $('#{$selectId}').data('selected', '');
-                    $('#{$selectId}').text(__blang.bilder_loading_error);
+                    $('#{$selectId}').text(__blang.builder_loading_error);
                 }
             });
         }
         else
         {
-            $('#{$selectId}').text(__blang.bilder_value_is_empty);
+            $('#{$selectId}').text(__blang.builder_value_is_empty);
         }
 
 EOT;

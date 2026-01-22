@@ -164,7 +164,7 @@ class Table extends TWrapper implements Renderable
         $this->id = input('get.__table__', 'the-table');
 
         $this->emptyText = Module::config('table_empty_text');
-        $this->actionRowText = __blang('bilder_action_operation');
+        $this->actionRowText = __blang('builder_action_operation');
 
         $this->tEmpty = new TEmpty;
 
@@ -643,7 +643,7 @@ class Table extends TWrapper implements Renderable
         }
 
         if (empty($this->pagesizeDropdown)) {
-            $this->pagesizeDropdown = new DropdownBtns('pagesize', __blang('bilder_paginator_num_per_page', ['num' => $this->pageSize]));
+            $this->pagesizeDropdown = new DropdownBtns('pagesize', __blang('builder_paginator_num_per_page', ['num' => $this->pageSize]));
         }
 
         $this->pagesizeDropdown->items($items)->class('btn-xs btn-default')->addGroupClass('dropup pull-right m-r-10');
@@ -1059,7 +1059,7 @@ EOT;
 
         if ($this->usePagesizeDropdown && $this->pageSize && empty($this->pagesizeDropdown)) {
             $items = [
-                0 => __blang('bilder_pagesize_default'),
+                0 => __blang('builder_pagesize_default'),
                 6 => '6',
                 10 => '10',
                 14 => '14',
@@ -1083,7 +1083,7 @@ EOT;
 
         $emptyText = $this->emptyText;
         if (!$fetchData && $this->delay) {
-            $emptyText = '<div class="text-center">' . __blang('bilder_loading') . '</div>';
+            $emptyText = '<div class="text-center">' . __blang('builder_loading') . '</div>';
         }
 
         $vars = [
@@ -1174,7 +1174,7 @@ EOT;
             return $displayer;
         }
 
-        throw new \InvalidArgumentException(__blang('bilder_invalid_argument_exception') . ' : ' . $name);
+        throw new \InvalidArgumentException(__blang('builder_invalid_argument_exception') . ' : ' . $name);
     }
 
     /**

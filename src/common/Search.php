@@ -347,8 +347,8 @@ class Search extends SWrapper implements Renderable
             $this->fields('search_buttons', ' ', '3 col-lg-3 col-sm-12 col-xs-12 search-buttons')
                 ->size('3 col-lg-4 col-sm-2 col-xs-12', '9 col-lg-8 col-sm-8 col-xs-12')
                 ->with(
-                    $this->button('submit', __blang('bilder_button_filter'), '6 col-lg-6 col-sm-6 col-xs-6')->class('btn-info ' . $this->butonsSizeClass),
-                    $this->button('button', __blang('bilder_button_reset'), '6 col-lg-6 col-sm-6 col-xs-6')->class('btn-default ' . $this->butonsSizeClass)->attr('onclick="location.replace(location.href)"')
+                    $this->button('submit', __blang('builder_button_filter'), '6 col-lg-6 col-sm-6 col-xs-6')->class('btn-info ' . $this->butonsSizeClass),
+                    $this->button('button', __blang('builder_button_reset'), '6 col-lg-6 col-sm-6 col-xs-6')->class('btn-default ' . $this->butonsSizeClass)->attr('onclick="location.replace(location.href)"')
                 );
         }
 
@@ -367,7 +367,7 @@ class Search extends SWrapper implements Renderable
     public function btnSubmit($label = '筛&nbsp;&nbsp;选', $size = '2 col-lg-2 col-sm-6 col-xs-12', $class = 'btn-info')
     {
         if ($label == '筛&nbsp;&nbsp;选') {
-            $label = __blang('bilder_button_filter');
+            $label = __blang('builder_button_filter');
         }
         $this->fieldsEnd();
         $this->button('submit', $label, $size)->class($class . ' ' . $this->butonsSizeClass);
@@ -386,7 +386,7 @@ class Search extends SWrapper implements Renderable
     public function btnReset($label = '重&nbsp;&nbsp;置', $size = '2 col-lg-2 col-sm-6 col-xs-12', $class = 'btn-warning')
     {
         if ($label == '重&nbsp;&nbsp;置') {
-            $label = __blang('bilder_button_reset');
+            $label = __blang('builder_button_reset');
         }
         $this->button('reset', $label, $size)->class($class . ' ' . $this->butonsSizeClass)->addAttr('onclick="location.replace(location.href)"');
         return $this;
@@ -474,9 +474,9 @@ class Search extends SWrapper implements Renderable
                 if($('#{$form} form').hasClass('form-empty')) {
                     return true;
                 }
-                var index = layer.msg(__blang.bilder_reset_filter_criteria, {
+                var index = layer.msg(__blang.builder_reset_filter_criteria, {
                     time: 2000,
-                    btn: [__blang.bilder_button_ok, __blang.bilder_button_cancel],
+                    btn: [__blang.builder_button_ok, __blang.builder_button_cancel],
                     yes: function (params) {
                         layer.close(index);
                         location.replace(location.href);
@@ -498,20 +498,20 @@ class Search extends SWrapper implements Renderable
             layer.prompt({
                 formType: 0,
                 value: '',
-                btn: [__blang.bilder_button_ok, __blang.bilder_button_cancel],
-                title: __blang.bilder_please_enter_the_page_number + '(1~' + last + ')'
+                btn: [__blang.builder_button_ok, __blang.builder_button_cancel],
+                title: __blang.builder_please_enter_the_page_number + '(1~' + last + ')'
             }, function(value, index, elem){
                 var page = parseInt(value);
                 if(!page || page <1)
                 {
-                    layer.msg(__blang.bilder_page_number_input_error, {
+                    layer.msg(__blang.builder_page_number_input_error, {
                         time: 1500
                     });
                     return false;
                 }
                 else if(page > last)
                 {
-                    layer.msg(__blang.bilder_page_number_cannot_exceed + ' :' + last, {
+                    layer.msg(__blang.builder_page_number_cannot_exceed + ' :' + last, {
                         time: 1500
                     });
                     return false;
@@ -582,7 +582,7 @@ class Search extends SWrapper implements Renderable
                 columns.push($(e).data('key'));
             });
             if(!columns.length) {
-                lightyear.notify(__blang.bilder_show_at_least_one_field, 'warning');
+                lightyear.notify(__blang.builder_show_at_least_one_field, 'warning');
                 event.stopPropagation();
                 return false;
             }
@@ -724,7 +724,7 @@ EOT;
             return $displayer;
         }
 
-        throw new \InvalidArgumentException(__blang('bilder_invalid_argument_exception') . ' : ' . $name);
+        throw new \InvalidArgumentException(__blang('builder_invalid_argument_exception') . ' : ' . $name);
     }
 
     /**

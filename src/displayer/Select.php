@@ -138,7 +138,7 @@ class Select extends Field
         $selectId = $this->getId();
 
         if (empty($this->jsOptions['placeholder'])) {
-            $this->jsOptions['placeholder'] = __blang('bilder_please_select') . $this->label;
+            $this->jsOptions['placeholder'] = __blang('builder_please_select') . $this->label;
         }
 
         if (isset($this->jsOptions['ajax'])) {
@@ -255,7 +255,7 @@ class Select extends Field
                             texts.push(d.__text__ || d['{$text}'] || d.text);
                         }
 
-                        $('#{$selectId}-text').text(texts.length ? texts.join('{$separator}') : __blang.bilder_value_is_empty);
+                        $('#{$selectId}-text').text(texts.length ? texts.join('{$separator}') : __blang.builder_value_is_empty);
                     }
                     else
                     {
@@ -275,7 +275,7 @@ class Select extends Field
                     {
                         $('#{$selectId}').replaceWith('<span style="line-height:33px;" id="{$selectId}-text"></span>');
                         $('#{$selectId}-text').parent('div').addClass('field-show');
-                        $('#{$selectId}-text').text(__blang.bilder_loading_error);
+                        $('#{$selectId}-text').text(__blang.builder_loading_error);
                         
                     }
                     else
@@ -289,7 +289,7 @@ class Select extends Field
         {
             if(readonly{$key})
             {
-                $('#{$selectId}').replaceWith('<span style="line-height:33px;" id="{$selectId}-text">' + __blang.bilder_loading + '</span>');
+                $('#{$selectId}').replaceWith('<span style="line-height:33px;" id="{$selectId}-text">' + __blang.builder_loading + '</span>');
                 $('#{$selectId}-text').parent('div').addClass('field-show');
             }
             else

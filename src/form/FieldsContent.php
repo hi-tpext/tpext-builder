@@ -243,7 +243,7 @@ class FieldsContent extends FWrapper implements Renderable
             return $row->$name($arguments[0], $row->getLabel());
         }
 
-        throw new \InvalidArgumentException(__blang('bilder_invalid_argument_exception') . ' : ' . $name);
+        throw new \InvalidArgumentException(__blang('builder_invalid_argument_exception') . ' : ' . $name);
     }
 
     public function destroy()

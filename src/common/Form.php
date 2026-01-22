@@ -587,7 +587,7 @@ class Form extends FWrapper implements Renderable
     public function btnSubmit($label = '提&nbsp;&nbsp;交', $size = '6 col-lg-6 col-sm-6 col-xs-6', $class = 'btn-info')
     {
         if ($label == '提&nbsp;&nbsp;交') {
-            $label = __blang('bilder_button_submit');
+            $label = __blang('builder_button_submit');
         }
         $this->bottomOffset();
         $this->button('submit', $label, $size)->class($class . ' ' . $this->butonsSizeClass);
@@ -606,7 +606,7 @@ class Form extends FWrapper implements Renderable
     public function btnReset($label = '重&nbsp;&nbsp;置', $size = '6 col-lg-6 col-sm-6 col-xs-6', $class = 'btn-warning')
     {
         if ($label == '重&nbsp;&nbsp;置') {
-            $label = __blang('bilder_button_reset');
+            $label = __blang('builder_button_reset');
         }
         $this->bottomOffset();
         $this->button('reset', $label, $size)->class($class . ' ' . $this->butonsSizeClass);
@@ -626,7 +626,7 @@ class Form extends FWrapper implements Renderable
     public function btnBack($label = '返&nbsp;&nbsp;回', $size = '6 col-lg-6 col-sm-6 col-xs-6', $class = 'btn-default btn-go-back', $attr = 'onclick="history.go(-1);')
     {
         if ($label == '返&nbsp;&nbsp;回') {
-            $label = __blang('bilder_button_go_back');
+            $label = __blang('builder_button_go_back');
         }
         $this->bottomOffset();
         $this->button('button', $label, $size)->class($class . ' ' . $this->butonsSizeClass)->addAttr($attr);
@@ -645,7 +645,7 @@ class Form extends FWrapper implements Renderable
     public function btnLayerClose($label = '返&nbsp;&nbsp;回', $size = '12 col-lg-12 col-sm-12 col-xs-12', $class = 'btn-default')
     {
         if ($label == '返&nbsp;&nbsp;回') {
-            $label = __blang('bilder_button_go_back');
+            $label = __blang('builder_button_go_back');
         }
         $this->bottomOffset();
         $this->button('button', $label, $size)->class($class . ' btn-close-layer' . ' ' . $this->butonsSizeClass);
@@ -822,9 +822,9 @@ class Form extends FWrapper implements Renderable
                 var index1 = parent.layer.getFrameIndex(window.name);
                 if(index1)
                 {
-                    var index2 = layer.msg(__blang.bilder_confirm_close_this_window, {
+                    var index2 = layer.msg(__blang.builder_confirm_close_this_window, {
                         time: 2000,
-                        btn: [__blang.bilder_button_ok, __blang.bilder_button_cancel],
+                        btn: [__blang.builder_button_ok, __blang.builder_button_cancel],
                         yes: function (params) {
                             layer.close(index2);
                             
@@ -843,7 +843,7 @@ class Form extends FWrapper implements Renderable
             errorPlacement: function errorPlacement(error, element) {
                 var parent = $(element).closest('div.form-group');
                 if ($(element).hasClass('item-field')) {
-                    $('#help-block .error-label').text(parent.find('.control-label,.full-label').text() + ' ' + $(element).data('label') + ' * ' + __blang.bilder_this_field_is_required);
+                    $('#help-block .error-label').text(parent.find('.control-label,.full-label').text() + ' ' + $(element).data('label') + ' * ' + __blang.builder_this_field_is_required);
                     $(element).closest('td').addClass('has-error');
                     return;
                 }
@@ -949,7 +949,7 @@ EOT;
                 $this->__fields__->addRow($row);
             } else if ($this->__items__) {
                 if ($name == 'hidden') {
-                    throw new \InvalidArgumentException(__blang('bilder_not_allowed') . ' : ' . $name);
+                    throw new \InvalidArgumentException(__blang('builder_not_allowed') . ' : ' . $name);
                 }
                 $row->class('text-center');
                 $this->__items__->addCol($arguments[0], $row);
@@ -993,7 +993,7 @@ EOT;
             return $displayer;
         }
 
-        throw new \InvalidArgumentException(__blang('bilder_invalid_argument_exception') . ' : ' . $name);
+        throw new \InvalidArgumentException(__blang('builder_invalid_argument_exception') . ' : ' . $name);
     }
 
     /**
