@@ -60,7 +60,7 @@
         {/volist}
         <td class="row-__action__ vertical-middle text-center">
           <input type="hidden" value="-1" />
-          <span class="btn btn-xs btn-danger action-delete" id="bar-delete-0" data-id="new-0" title="{:__blang('bilder_remove')}">
+          <span class="btn btn-xs btn-danger action-delete" id="bar-{$name}-delete-0" data-id="new-0" title="{:__blang('bilder_remove')}">
             <i class="mdi mdi-delete"></i></span>
         </td>
       </tr>
@@ -69,7 +69,7 @@
   <textarea style="display: none;" id="items-{$name}-script">{$script|raw}</textarea>
   {/if}
   {empty name="$list"}
-  <div class="items-empty-text">
+  <div id="items-{$name}-empty-text" class="items-empty-text">
     {$emptyText|raw}
   </div>
   {/empty}

@@ -842,14 +842,13 @@ class Form extends FWrapper implements Renderable
             rules: {$rules},
             errorPlacement: function errorPlacement(error, element) {
                 var parent = $(element).closest('div.form-group');
-                if($(element).hasClass('item-field'))
-                {
-                    $('#help-block .error-label').html(parent.find('.control-label,.full-label').text() + $(element).data('label') + '* ' + __blang.bilder_this_field_is_required);
+                if ($(element).hasClass('item-field')) {
+                    $('#help-block .error-label').text(parent.find('.control-label,.full-label').text() + ' ' + $(element).data('label') + ' * ' + __blang.bilder_this_field_is_required);
                     $(element).closest('td').addClass('has-error');
                     return;
                 }
                 parent.addClass('has-error');
-                $('#help-block .error-label').html(parent.find('.control-label,.full-label').text() + '* ' + error.text());
+                $('#help-block .error-label').text(parent.find('.control-label,.full-label').text() + ' * ' + error.text());
             },
             highlight: function(element) {
                 var el = $(element);
@@ -859,13 +858,11 @@ class Form extends FWrapper implements Renderable
             },
             unhighlight: function(element) {
                 $(element).next('.tagsinput').removeClass('is-invalid');
-                if($(element).hasClass('item-field'))
-                {
+                $(element).closest('div.form-group').removeClass('has-error');
+                if ($(element).hasClass('item-field')) {
                     $(element).closest('td').removeClass('has-error');
                 }
-                $(element).closest('div.form-group').removeClass('has-error');
-                if($('.form-group.has-error').size() == 0 && $('.item-field.has-error').size() == 0)
-                {
+                if ($('.form-group.has-error').size() == 0 && $('td.has-error').size() == 0) {
                     $('#help-block .error-label').html('&nbsp;');
                 }
             },
