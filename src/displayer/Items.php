@@ -16,6 +16,8 @@ class Items extends Field
 
     protected $isFieldsGroup = true;
 
+    protected $canRecover = true;
+
     protected $data = [];
 
     /**
@@ -131,6 +133,18 @@ class Items extends Field
     public function canAdd($val)
     {
         $this->__items__->canAdd($val);
+        return $this;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param boolean $val
+     * @return $this
+     */
+    public function canRecover($val)
+    {
+        $this->canRecover = $val;
         return $this;
     }
 
@@ -253,15 +267,46 @@ class Items extends Field
     protected function actionScript()
     {
         $id = 'items-' . $this->name;
+        $canRecover = $this->canRecover ? 'true' : 'false';
+        $key = preg_replace('/\W/', '_', $id);
 
         $script = <<<EOT
+
+        var {$key}CanRecover = {$canRecover};
+
         $(document).on('click', "#{$id} .row-__action__ span.action-delete", function () {
            var del = $(this).prev('input').val();
            if(del === '0') {
-                $(this).prev('input').val(1);
-                $(this).removeClass('btn-danger').addClass('btn-success').attr('title', __blang.bilder_recover);
-                $(this).children('i').removeClass('mdi-delete').addClass('mdi-restart');
-                $(this).parents('td').prevAll('td').find('.item-field-required').addClass('ignore').removeClass('has-error');
+                if(!{$key}CanRecover) {
+                    var that = $(this);
+                    $.alert({
+                        title: __blang.bilder_operation_tips,
+                        content: __blang.bilder_confirm_to_do_operation + ' <strong>' + __blang.bilder_remove + '</strong> ' + __blang.bilder_action_operation + ' ?',
+                        type: 'orange',
+                        buttons: {
+                            confirm: {
+                                text: __blang.bilder_button_ok,
+                                btnClass: 'btn-primary',
+                                action: function () {
+                                    that.prev('input').val(1);
+                                    that.parents('td').prevAll('td').find('.item-field-required').addClass('ignore');
+                                    that.parents('tr').addClass('hidden');
+                                }
+                            },
+                            cancel: {
+                                text: __blang.bilder_button_cancel,
+                                action: function () {
+
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    $(this).prev('input').val(1);
+                    $(this).removeClass('btn-danger').addClass('btn-success').attr('title', __blang.bilder_recover);
+                    $(this).children('i').removeClass('mdi-delete').addClass('mdi-restart');
+                    $(this).parents('td').prevAll('td').find('.item-field-required').addClass('ignore').removeClass('has-error');
+                }
            }
            else if(del === '1') {
                 $(this).prev('input').val(0);
@@ -298,11 +343,9 @@ class Items extends Field
         var i = 1;
         var script = '';
 
-        if(!window.reset)
-        {
-            window.reset = function(obj)
-            {
-                if($(obj).hasClass('checkbox-label') || $(obj).hasClass('radio-label'))
+        if(!window.reset) {
+            window.reset = function(obj) {
+                if ($(obj).hasClass('checkbox-label') || $(obj).hasClass('radio-label'))
                 {
                     var boxes = $(obj).find('input');
                     boxes.each(function(){
@@ -312,8 +355,7 @@ class Items extends Field
                     });
                     return;
                 }
-                else if($(obj).hasClass('switch-label'))
-                {
+                else if($(obj).hasClass('switch-label')) {
                     var input = $(obj).prev('input');
                     input.attr('data-name', input.attr('name'));
                     input.removeAttr('name');
@@ -323,8 +365,7 @@ class Items extends Field
                 
                 var oldId = $(obj).attr('id');
                 var oldOldId = oldId;
-                if(!oldId)
-                {
+                if(!oldId) {
                     return;
                 }
                 var newid = oldId.replace('-no-init-script','__new__' + i);
@@ -333,8 +374,7 @@ class Items extends Field
                 $(obj).attr('id', newid);
                 
                 var oldName = $(obj).data('name');
-                if(!oldName)
-                {
+                if (!oldName) {
                     return;
                 }
                 var newName = oldName.replace(/(.+?)\[__new__\](.+?)/, '$1' + '[__new__' + i + ']$2');
@@ -346,12 +386,10 @@ class Items extends Field
                 //console.log('-------------------------------------------');
                 $(obj).attr('name', newName);
                 $(obj).removeAttr('data-name');
-                if($(obj).hasClass('item-field-required'))
-                {
+                if ($(obj).hasClass('item-field-required')) {
                     $(obj).attr('required', true);
                 }
-                if($(obj).hasClass('file-url-input'))
-                {
+                if ($(obj).hasClass('file-url-input')) {
                     var prent = $(obj).parent('.input-group');
                     var ulist = prent.prev('ul.lyear-uploads-pic');
                     var picker = prent.find('.upload-picker');
@@ -375,11 +413,10 @@ class Items extends Field
                 reset(this);
             });
             $(this).parents('tr').before(node);
-            $('.items-empty-text').hide();
+            $('#{$id}-empty-text').hide();
             script = script.replace(/-no-init-script/g, '');
             //console.log(script);
-            if(script)
-            {
+            if (script) {
                 if ($('#script-div').size()) {
                     $('#script-div').html('\<script\>' + script + '\</script\>');
                 } else {
