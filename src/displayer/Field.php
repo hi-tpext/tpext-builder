@@ -183,6 +183,16 @@ class Field implements Fillable
      *
      * @return string
      */
+    public function getClassName()
+    {
+        return $this->wrapper->getClassName();
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return string
+     */
     public function getOriginName()
     {
         return $this->wrapper->getName();
@@ -1078,7 +1088,7 @@ EOT;
 
     protected function autoPostScript()
     {
-        $class = 'row-' . $this->name . '-td';
+        $class = 'row-' . $this->getClassName() . '-td';
 
         $refresh = $this->autoPostRefresh ? 1 : 0;
 
@@ -1312,7 +1322,7 @@ EOT;
             'extKey' => $this->extKey,
             'extNameKey' => $this->extNameKey,
             'value' => $value,
-            'class' => ' row-' . preg_replace('/\W/', '', $this->name) . $this->getClass() . $mapClass,
+            'class' => ' row-' . $this->getClassName() . $this->getClass() . $mapClass,
             'attr' => $this->getAttrWithStyle() . $extendAttr,
             'error' => $this->error,
             'size' => $this->adjustSize(),
@@ -1400,7 +1410,5 @@ EOT;
      *
      * @return void
      */
-    protected function loadLocale()
-    {
-    }
+    protected function loadLocale() {}
 }
