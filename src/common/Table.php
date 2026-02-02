@@ -889,6 +889,7 @@ EOT;
                 $displayer->clearScript();
 
                 $displayer
+                    ->arrayName(false)
                     ->value('')
                     ->fill($data)
                     ->extKey('-' . $this->id . '-' . $key)

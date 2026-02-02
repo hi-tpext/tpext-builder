@@ -169,10 +169,10 @@ class Field implements Fillable
         if ($this->arrayName) {
 
             if ($this->innerName) {
-                return $this->arrayName[0] . $this->innerName . $this->arrayName[1];
+                return $this->arrayName[0] . $this->innerName . $this->arrayName[1] . $this->extNameKey;
             }
 
-            return $this->arrayName[0] . $this->name . $this->arrayName[1];
+            return $this->arrayName[0] . $this->name . $this->arrayName[1] . $this->extNameKey;
         }
 
         return $this->name . $this->extNameKey;
@@ -201,7 +201,7 @@ class Field implements Fillable
     /**
      * Undocumented function
      *
-     * @param array $val
+     * @param array|bool $val
      * @return $this
      */
     public function arrayName($val)
