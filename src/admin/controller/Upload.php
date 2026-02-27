@@ -175,9 +175,26 @@ class Upload extends Controller
                         ['status' => 200, 'info' => __blang('builder_file_uploading_succeeded'), 'picurl' => $newPath]
                     );
                 case 'webuploader':
-                    return json(
+                    $res = json(
                         ['status' => 200, 'info' => __blang('builder_file_uploading_succeeded'), 'class' => 'success', 'id' => rand(1, 9999), 'picurl' => $newPath]
                     );
+                    // Make sure file is not cached (as it happens for example on iOS devices)
+                    if ($res instanceof \Workerman\Protocols\Http\Response) {
+                        $res->withHeaders([
+                            "Expires" => "Mon, 26 Jul 1997 05:00:00 GMT",
+                            "Last-Modified" => gmdate("D, d M Y H:i:s") . " GMT",
+                            "Cache-Control" => "no-store, no-cache, must-revalidate",
+                            "Pragma" => "no-cache"
+                        ]);
+                    } else {
+                        $res->header([
+                            "Expires" => "Mon, 26 Jul 1997 05:00:00 GMT",
+                            "Last-Modified" => gmdate("D, d M Y H:i:s") . " GMT",
+                            "Cache-Control" => "no-store, no-cache, must-revalidate",
+                            "Pragma" => "no-cache"
+                        ]);
+                    }
+                    return $res;
                 case 'tinymce':
                     return json(
                         [
@@ -223,11 +240,11 @@ class Upload extends Controller
         $config_file = App::getPublicPath() . '/assets/builderueditor/config.json';
         $config = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents($config_file)), true);
         switch ($action) {
-                /* 获取配置信息 */
+            /* 获取配置信息 */
             case 'config':
                 $result = $config;
                 break;
-                /* 列出图片 */
+            /* 列出图片 */
             case 'listimage':
                 return json($this->showFile('listimage', $config));
 
@@ -390,14 +407,14 @@ class Upload extends Controller
     {
         /* 判断类型 */
         switch ($type) {
-                /* 列出附件 */
+            /* 列出附件 */
             case 'listfile':
                 $allowFiles = $config['fileManagerAllowFiles'];
                 $listSize = $config['fileManagerListSize'];
                 $path = realpath('./upload/files/');
                 break;
 
-                /* 列出图片 */
+            /* 列出图片 */
             case 'listimage':
             default:
                 $allowFiles = $config['imageManagerAllowFiles'];
