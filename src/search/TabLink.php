@@ -72,6 +72,20 @@ class TabLink implements Renderable
     /**
      * Undocumented function
      *
+     * @return string
+     */
+    public function getActive()
+    {
+        if (is_null($this->active) && count($this->options)) {
+            return array_keys($this->options)[0];
+        }
+
+        return $this->active;
+    }
+
+    /**
+     * Undocumented function
+     *
      * @return $this
      */
     public function beforRender()
