@@ -28,6 +28,7 @@ if (!function_exists('csrf_token')) {
 if (!function_exists('__blang')) {
     function __blang($name = null, $vars = [], $range = '')
     {
+        $name = str_replace('bilder_', 'builder_', $name);
         return Lang::get($name, $vars, $range);
     }
 }
@@ -42,7 +43,7 @@ if (!function_exists('class_basename')) {
     function class_basename($class): string
     {
         $class = is_object($class) ? get_class($class) : $class;
-        
+
         return basename(str_replace('\\', '/', $class));
     }
 }
