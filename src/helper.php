@@ -28,6 +28,7 @@ if (!function_exists('csrf_token')) {
 if (!function_exists('__blang')) {
     function __blang(string $name = null, array $vars = [], string $range = '')
     {
+        $name = str_replace('bilder_', 'builder_', $name);
         return Lang::get($name, $vars, $range);
     }
 }
