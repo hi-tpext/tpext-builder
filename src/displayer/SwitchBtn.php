@@ -15,7 +15,8 @@ class SwitchBtn extends Field
     /**
      * Undocumented function
      * @example 1 (1, 0) / ('yes', 'no') / ('on', 'off') etc...
-     * @param array $val
+     * @param mixed $on
+     * @param mixed $off
      * @return $this
      */
     public function pair($on = 1, $off = 0)

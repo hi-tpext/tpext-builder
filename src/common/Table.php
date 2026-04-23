@@ -971,7 +971,6 @@ EOT;
 
     /**
      * Undocumented function
-     * @param string $name
      * 
      * @return FieldsContent
      */
@@ -1085,6 +1084,10 @@ EOT;
         $emptyText = $this->emptyText;
         if (!$fetchData && $this->delay) {
             $emptyText = '<div class="text-center">' . __blang('builder_loading') . '</div>';
+        }
+
+        if ($this->partial) {
+            $this->addBottom()->display('<script>' . PHP_EOL . implode('', array_unique(Builder::getInstance()->getScript())) . PHP_EOL . '</script>');
         }
 
         $vars = [
