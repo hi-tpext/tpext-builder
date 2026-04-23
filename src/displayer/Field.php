@@ -1094,7 +1094,10 @@ EOT;
 
         $script = <<<EOT
 
-        tpextbuilder.autoPost('{$class}', '{$this->autoPost}' ,{$refresh});
+        if(!window.__auto_post_bind__.includes('{$class}')){
+            tpextbuilder.autoPost('{$class}', '{$this->autoPost}' ,{$refresh});
+            window.__auto_post_bind__.push('{$class}');
+        }
 
 EOT;
         $this->script[] = $script;

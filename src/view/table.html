@@ -88,6 +88,10 @@
     {/notempty}
     <script>
         var partial = '{$partial}' == 1;
+        
+        if (!window.__auto_post_bind__) {
+            window.__auto_post_bind__ = [];
+        }
 
         document.getElementById('form-__sort__-{$id}').value = '{$sort}';
 
