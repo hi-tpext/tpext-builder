@@ -153,6 +153,8 @@ class Table extends TWrapper implements Renderable
      */
     protected $tEmpty = null;
 
+    protected $rowScripts = [];
+
     /**
      * Undocumented function
      *
@@ -905,6 +907,7 @@ EOT;
                     'attr' => $displayer->getAttrWithStyle(),
                     'wrapper' => $colunm,
                 ];
+                $this->rowScripts = array_merge($this->rowScripts, $displayer->getScript());
             }
 
             if ($this->useActionbar) {
@@ -1086,8 +1089,8 @@ EOT;
             $emptyText = '<div class="text-center">' . __blang('builder_loading') . '</div>';
         }
 
-        if ($this->partial) {
-            $this->addBottom()->display('<script>' . PHP_EOL . implode('', array_unique(Builder::getInstance()->getScript())) . PHP_EOL . '</script>');
+        if ($this->partial && !empty($this->rowScripts)) {
+            $this->addBottom()->display('<script>' . PHP_EOL . implode('', array_unique($this->rowScripts)) . PHP_EOL . '</script>');
         }
 
         $vars = [
@@ -1205,6 +1208,9 @@ EOT;
         $this->displayers = null;
         $this->data = null;
         $this->tEmpty = null;
+        $this->rowScripts = null;
+        $this->ids = null;
+        $this->actionbars = null;
         if ($this->searchForm) {
             $this->searchForm->destroy();
             $this->searchForm = null;
