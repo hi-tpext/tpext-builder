@@ -133,7 +133,6 @@ class Column extends Widget
     /**
      * 获取一Swiper
      *
-     * @param integer|string $size col大小
      * @return Swiper
      */
     public function swiper()
