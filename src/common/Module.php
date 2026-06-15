@@ -2,8 +2,6 @@
 
 namespace tpext\builder\common;
 
-use tpext\think\App;
-use think\facade\Lang;
 use tpext\common\ExtLoader;
 use tpext\common\Module as baseModule;
 
@@ -94,7 +92,7 @@ class Module extends baseModule
      */
     public function setUploadUrl($newUrl)
     {
-        $this->uploadUrl = (string)$newUrl;
+        $this->uploadUrl = (string) $newUrl;
 
         return $this;
     }
@@ -107,7 +105,7 @@ class Module extends baseModule
      */
     public function setImportUrl($newUrl)
     {
-        $this->importUrl = (string)$newUrl;
+        $this->importUrl = (string) $newUrl;
 
         return $this;
     }
@@ -120,7 +118,7 @@ class Module extends baseModule
      */
     public function setChooseUrl($newUrl)
     {
-        $this->chooseUrl = (string)$newUrl;
+        $this->chooseUrl = (string) $newUrl;
 
         return $this;
     }
@@ -203,6 +201,6 @@ class Module extends baseModule
 
     public function loaded()
     {
-        Lang::load(Module::getInstance()->getRoot() . 'src' . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . App::getDefaultLang() . '.php');
+        $this->loadLang('common');
     }
 }

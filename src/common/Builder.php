@@ -104,7 +104,7 @@ class Builder implements Renderable
         if (self::$instance == null) {
             self::$instance = new static($title, $desc);
             self::$instance->created();
-            
+
             if (self::$isWebmanContext) {
                 Context::set(static::class, self::$instance);
             }
@@ -136,7 +136,7 @@ class Builder implements Renderable
         if (self::$instance) {
             self::$instance->destroy();
             self::$instance = null;
-            
+
             if (self::$isWebmanContext) {
                 Context::set(static::class, null);
             }
@@ -808,7 +808,7 @@ class Builder implements Renderable
 
         unset($j);
 
-        $__blang = include Module::getInstance()->getRoot() . 'src' . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . App::getDefaultLang() . '.php';
+        $__blang = Module::getInstance()->getLang('common');
 
         $vars = [
             'title' => $this->title ? $this->title : '',
