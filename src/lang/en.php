@@ -132,7 +132,7 @@ return [
     'builder_jquery_validate_maxlength'       => 'You can enter up to {0} characters',
     'builder_jquery_validate_minlength'       => 'At least {0} characters must be entered',
     'builder_jquery_validate_rangelength'     => 'Please enter a string with a length between {0} and {1}',
-    'builder_jquery_validate_range'           => 'lease enter a numerical value in the range of {0} to {1}',
+    'builder_jquery_validate_range'           => 'Please enter a numerical value in the range of {0} to {1}',
     'builder_jquery_validate_step'            => 'Please enter an integer multiple of {0}',
     'builder_jquery_validate_max'             => 'Please enter a value not greater than 4 {0}',
     'builder_jquery_validate_min'             => 'Please enter a value not less than {0}',
