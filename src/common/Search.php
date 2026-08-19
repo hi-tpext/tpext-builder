@@ -386,7 +386,7 @@ class Search extends SWrapper implements Renderable
      * @param string $class
      * @return $this
      */
-    public function btnReset($label = '重&nbsp;&nbsp;置', $size = '2 col-lg-2 col-sm-6 col-xs-12', $class = 'btn-warning')
+    public function btnReset($label = '重&nbsp;&nbsp;置', $size = '2 col-lg-2 col-sm-6 col-xs-12', $class = 'btn-default')
     {
         if ($label == '重&nbsp;&nbsp;置') {
             $label = __blang('builder_button_reset');
@@ -431,6 +431,9 @@ class Search extends SWrapper implements Renderable
 
         foreach ($this->rows as $row) {
             $row->beforRender();
+            if ($row instanceof SRow) {
+                $row->getDisplayer()->extKey('-' . $this->tableId);
+            }
         }
 
         if ($this->tablink) {
