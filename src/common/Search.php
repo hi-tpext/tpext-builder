@@ -430,10 +430,10 @@ class Search extends SWrapper implements Renderable
         $this->searchScript();
 
         foreach ($this->rows as $row) {
-            $row->beforRender();
             if ($row instanceof SRow) {
                 $row->getDisplayer()->extKey('-' . $this->tableId);
             }
+            $row->beforRender();
         }
 
         if ($this->tablink) {
