@@ -1314,7 +1314,7 @@ EOT;
         $extendAttr = '';
 
         if ($this->isInput) {
-            $extendAttr = ($this->disabled ? ' disabled' : '') . ($this->readonly ? ' readonly onclick="return false;"' : '');
+            $extendAttr = ($this->isRequired() ? ' required="true"' : '') . ($this->disabled ? ' disabled' : '') . ($this->readonly ? ' readonly onclick="return false;"' : '');
         }
 
         $vars = [
@@ -1413,7 +1413,5 @@ EOT;
      *
      * @return void
      */
-    protected function loadLocale()
-    {
-    }
+    protected function loadLocale() {}
 }
