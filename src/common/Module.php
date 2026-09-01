@@ -7,7 +7,7 @@ use tpext\common\Module as baseModule;
 
 class Module extends baseModule
 {
-    protected $version = '1.0.12';
+    protected $version = '1.1.2';
 
     protected $name = 'tpext.builder';
 
