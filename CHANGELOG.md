@@ -2,6 +2,16 @@
 
 ---
 
+## [未发布]
+
+1.新增 `inface\ReleaseAble` 接口与 `traits\HasDestroyOnce` 幂等标记，统一组件销毁契约：容器与组件类实现 ReleaseAble，`destroy()` 入口检查 `__destroyed__` 防止同一组件经多条归属路径被重复销毁，`parent::destroy()` 覆写链在末尾置位。
+
+2.销毁流程补漏：Form 补销毁 tab/step；Table 补销毁 toolbar/actionbar（原来只置空引用，Bar 全泄漏）；Tab/Step 补销毁 rows['content'] 并清理 labels/`__fields__`；Toolbar 补销毁 elms；Fields/Items/table FieldsContent 新增 `destroy()`；FRow/TColumn/SRow 对 displayer 判空保幂等；JSTree/ZTree 同步契约。
+
+3.数组属性销毁后复位为空数组（保持类型恒定），对象引用置 null。
+
+---
+
 ## [1.9.169 / 3.9.154]
 
 1.添加图片轮播组件`swiper()`，支持多种图片展示方式。

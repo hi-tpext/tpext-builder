@@ -6,10 +6,13 @@ use tpext\builder\traits\HasDom;
 use tpext\builder\tree\ZTree;
 use tpext\builder\tree\JSTree;
 use tpext\think\View;
+use tpext\builder\inface\ReleaseAble;
+use tpext\builder\traits\HasDestroyOnce;
 
-class Row extends Widget
+class Row extends Widget implements ReleaseAble
 {
     use HasDom;
+    use HasDestroyOnce;
 
     /**
      * Undocumented variable
@@ -222,10 +225,16 @@ class Row extends Widget
 
     public function destroy()
     {
+        // 已销毁直接返回：同一组件可被多归属路径重复触达（契约见 traits\HasDestroyOnce）
+        if ($this->__destroyed__) {
+            return;
+        }
         foreach ($this->cols as $col) {
             $col->destroy();
         }
 
-        $this->cols = null;
+        // 数组属性复位为空数组（保持类型恒定，二次 destroy 自然幂等）
+        $this->cols = [];
+        $this->__destroyed__ = true;
     }
 }

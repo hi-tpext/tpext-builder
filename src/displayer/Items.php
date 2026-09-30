@@ -465,4 +465,21 @@ EOT;
         $this->__items__->templateFieldCall($callback);
         return $this;
     }
+
+    public function destroy()
+    {
+        // 已销毁直接返回：同一组件可被多归属路径重复触达（契约见 traits\HasDestroyOnce）
+        if ($this->__destroyed__) {
+            return;
+        }
+        if ($this->__items__) {
+            $this->__items__->destroy();
+            $this->__items__ = null;
+        }
+
+        $this->form = null;
+
+        parent::destroy();
+        $this->__destroyed__ = true;
+    }
 }

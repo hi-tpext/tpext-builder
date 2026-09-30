@@ -190,4 +190,21 @@ class Fields extends Field
             'fields_content' => $this->__fields_content__,
         ];
     }
+
+    public function destroy()
+    {
+        // 已销毁直接返回：同一组件可被多归属路径重复触达（契约见 traits\HasDestroyOnce）
+        if ($this->__destroyed__) {
+            return;
+        }
+        if ($this->__fields_content__) {
+            $this->__fields_content__->destroy();
+            $this->__fields_content__ = null;
+        }
+
+        $this->widget = null;
+
+        parent::destroy();
+        $this->__destroyed__ = true;
+    }
 }

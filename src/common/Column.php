@@ -8,10 +8,13 @@ use tpext\builder\inface\Renderable;
 use tpext\builder\traits\HasDom;
 use tpext\builder\tree\JSTree;
 use tpext\builder\tree\ZTree;
+use tpext\builder\inface\ReleaseAble;
+use tpext\builder\traits\HasDestroyOnce;
 
-class Column extends Widget
+class Column extends Widget implements ReleaseAble
 {
     use HasDom;
+    use HasDestroyOnce;
 
     public $size = 12;
 
@@ -229,12 +232,18 @@ class Column extends Widget
 
     public function destroy()
     {
+        // 已销毁直接返回：同一组件可被多归属路径重复触达（契约见 traits\HasDestroyOnce）
+        if ($this->__destroyed__) {
+            return;
+        }
         foreach ($this->elms as $elm) {
-            if (method_exists($elm, 'destroy')) {
+            if ($elm instanceof ReleaseAble || method_exists($elm, 'destroy')) {
                 $elm->destroy();
             }
         }
 
-        $this->elms = null;
+        // 数组属性复位为空数组（保持类型恒定，二次 destroy 自然幂等）
+        $this->elms = [];
+        $this->__destroyed__ = true;
     }
 }

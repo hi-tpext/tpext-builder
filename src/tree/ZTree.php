@@ -9,10 +9,13 @@ use tpext\builder\common\Widget;
 use tpext\builder\traits\HasDom;
 use tpext\builder\common\Builder;
 use tpext\builder\inface\Renderable;
+use tpext\builder\inface\ReleaseAble;
+use tpext\builder\traits\HasDestroyOnce;
 
-class ZTree extends Widget implements Renderable
+class ZTree extends Widget implements Renderable, ReleaseAble
 {
     use HasDom;
+    use HasDestroyOnce;
 
     protected $data;
 
@@ -361,6 +364,11 @@ EOT;
 
     public function destroy()
     {
+        // 已销毁直接返回：同一组件可被多归属路径重复触达（契约见 traits\HasDestroyOnce）
+        if ($this->__destroyed__) {
+            return;
+        }
         $this->data = null;
+        $this->__destroyed__ = true;
     }
 }
