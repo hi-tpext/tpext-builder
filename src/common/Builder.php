@@ -711,6 +711,10 @@ class Builder implements Renderable, ReleaseAble
      */
     public static function isMinify()
     {
+		if (self::$isWebmanContext) {
+            return Context::get(static::class . '::minify');
+        }
+		
         return static::$minify;
     }
 
@@ -803,7 +807,7 @@ class Builder implements Renderable, ReleaseAble
             $this->script[] = "lightyear.notify('{$this->notify[0]}', '{$this->notify[1]}', {$this->notify[2]}, '{$this->notify[3]}', '{$this->notify[4]}', '{$this->notify[5]}');";
         }
 
-        if (static::$minify && !empty($this->customJs)) {
+        if (static::isMinify() && !empty($this->customJs)) {
             $this->js = $this->customJs;
             $this->css = $this->customCss;
         } else {
