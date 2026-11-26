@@ -701,6 +701,13 @@ class Builder implements Renderable, ReleaseAble
      */
     public static function minify($val)
     {
+        if (is_null(self::$isWebmanContext)) {
+            self::$isWebmanContext = class_exists(Context::class);
+        }
+        if (self::$isWebmanContext) {
+            Context::set(static::class . '::minify', $val);
+        }
+        
         static::$minify = $val;
     }
 
