@@ -17,12 +17,16 @@ trait HasDelete
         if (empty($ids)) {
             $this->error(__blang('builder_parameter_error'));
         }
+        $pk = $this->getPk();
+        $rows = $this->dataModel->where($pk, 'in', $ids)->where($this->dateScope)->select();
+
         $res = 0;
-        foreach ($ids as $id) {
+        foreach ($rows as $row) {
+            $id = $row[$pk];
             if (!$this->canDel($id)) {
                 continue;
             }
-            if ($this->dataModel->destroy($id)) {
+            if ($row->delete()) {
                 $res += 1;
                 $this->afterDel($id);
             }

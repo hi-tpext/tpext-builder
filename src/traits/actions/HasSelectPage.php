@@ -161,6 +161,7 @@ trait HasSelectPage
                     $where[] = [$idField, '=', $selected];
                 }
             }
+            $where += $this->dateScope;
             $list = $this->dataModel->with($this->selectWith)->where($where)->order($sortOrder)->field($this->selectFields)->select();
             $hasMore = 0;
         } else {
@@ -181,6 +182,8 @@ trait HasSelectPage
                 }
             }
 
+            $where += $this->dateScope;
+            $whereOr += $this->dateScope;
             $list = $this->dataModel->with($this->selectWith)->where($where)->whereOr($whereOr)->order($sortOrder)->limit(($page - 1) * $pagesize, $pagesize)->field($this->selectFields)->select();
 
             $hasMore = count($list) == $pagesize ? 1 : 0;
